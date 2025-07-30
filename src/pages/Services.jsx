@@ -521,8 +521,7 @@ const services = [
               </p>
               <p className={`text-base mb-8 leading-relaxed ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>
                 <div className="text-justify">
-                  Whether you're looking to automate customer service with intelligent chatbots or streamline operations with workflow automation, our experienced consultants will guide you every step of the way. Start your AI transformation journey today.
-                </div>
+                 </div>
               </p>
               <div className="flex flex-col sm:flex-row gap-4 w-full">
                 <button 
