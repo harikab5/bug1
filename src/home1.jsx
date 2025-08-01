@@ -244,7 +244,7 @@ export default function HomePage() {
              <div className={`flex-1 text-justify text-base md:text-lg max-w-xl mx-auto md:mx-0 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Empowering businesses and developers with cutting-edge AI tools for automation, analytics, and innovation. Trusted by industry leaders to drive digital transformation and smarter workflows. Our platform supports seamless integration, robust security, and real-time insights for every industry. Experience the future of work with scalable, reliable, and user-friendly AI solutions tailored to your needs.</div>
             {/* Right: Avatar & Name */}
             <div className="flex flex-col items-center md:items-end">
-              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Alex Carter" className="w-24 h-24 rounded-full mb-2 border-4 border-[#27bdb5] object-cover" />
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" loading="lazy" alt="Alex Carter" className="w-24 h-24 rounded-full mb-2 border-4 border-[#27bdb5] object-cover" />
               <div className={`font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Alex Carter</div>
               <div className="text-[#bfc1be] text-sm">Founder & Chief AI Officer</div>
             </div>
@@ -308,6 +308,7 @@ export default function HomePage() {
                       <img
                         src={testimonials[idx].image}
                         alt={testimonials[idx].name}
+                        loading="lazy"
                         className="w-16 h-16 rounded-full border-4 border-[#27bdb5] object-cover mx-auto mb-4 transition-all duration-300"
                       />
                       <div className={`font-bold text-lg mb-2 transition-all duration-300 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{testimonials[idx].name}</div>
@@ -375,6 +376,7 @@ export default function HomePage() {
           {/* Right: Image */}
           <div className="flex-1 w-full h-full">
             <img 
+              loading="lazy"
               src={ctaHome} 
               alt="CTA Home" 
               className="w-full h-full object-cover rounded-lg"

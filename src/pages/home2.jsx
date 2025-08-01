@@ -19,7 +19,7 @@ function ExpertCard({ img, name, title, bio }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <img src={img} alt={name} className="expert-img" />
+      <img src={img} loading="lazy" alt={name} className="expert-img" />
       <div className={`expert-info-container${hovered ? ' show' : ''}`}>
         <span className="expert-name">{name}</span>
         <span className="expert-underline"></span>
@@ -276,6 +276,7 @@ const SecondHome = () => {
                    <div className="w-full h-[50%] relative">
                      <img 
                        src={carouselEvents[getCardIndex(-1)].image} 
+                       loading="lazy"
                        alt={carouselEvents[getCardIndex(-1)].title}
                        className="w-full h-full object-cover"
                      />
@@ -302,6 +303,7 @@ const SecondHome = () => {
                   <div className="w-full h-[50%] relative">
                     <img 
                       src={carouselEvents[currentIndex].image} 
+                      loading="lazy"
                       alt={carouselEvents[currentIndex].title}
                       className="w-full h-full object-cover"
                     />
@@ -329,6 +331,7 @@ const SecondHome = () => {
                    <div className="w-full h-[50%] relative">
                      <img 
                        src={carouselEvents[getCardIndex(1)].image} 
+                       loading="lazy"
                        alt={carouselEvents[getCardIndex(1)].title}
                        className="w-full h-full object-cover"
                      />
@@ -631,7 +634,7 @@ const SecondHome = () => {
         <div className="max-w-6xl w-full flex flex-col md:flex-row items-center justify-center gap-36 py-16 relative">
           {/* CEO Image */}
           <div className="flex-shrink-0 flex items-center justify-center">
-            <img src={ceoImg} alt="CEO" className="w-[440px] h-[500px] object-cover rounded-2xl shadow-xl border-4 border-white" />
+            <img src={ceoImg} loading="lazy" alt="CEO" className="w-[440px] h-[500px] object-cover rounded-2xl shadow-xl border-4 border-white" />
           </div>
           {/* Message Content */}
           <div className="flex-1 flex flex-col justify-center items-start text-left text-white max-w-2xl">

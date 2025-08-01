@@ -129,7 +129,7 @@ const HowItWorksSection = ({ theme }) => {
           {/* Right: Image */}
           <div className="flex-1 flex items-stretch justify-center">
             <div className="relative w-full max-w-6xl bg-[#1a1a1a] rounded-2xl flex items-center justify-center" style={{boxShadow:'0 0 0 2px #19e6f7/20'}}>
-              <img src={howItWorksImg} alt="How it works" className="w-full h-full object-cover rounded-xl" />
+              <img src={howItWorksImg} loading="lazy" alt="How it works" className="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -225,7 +225,7 @@ const BenefitsSection = ({ theme }) => {
         {/* Left: Image/Illustration */}
         <div className="flex-1 flex items-center justify-center h-full">
           <div className="relative p-2 h-full flex items-center">
-            <img src={agentImg} alt="AI Assistant" className="w-full h-full object-cover rounded-2xl shadow-xl relative z-10" style={{minHeight: '400px'}} />
+            <img src={agentImg} loading="lazy" alt="AI Assistant" className="w-full h-full object-cover rounded-2xl shadow-xl relative z-10" style={{minHeight: '400px'}} />
             {/* Glowing border effect */}
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#19e6f7] to-[#19e6f7] blur-sm opacity-70 animate-pulse"></div>
             <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-[#19e6f7] to-[#19e6f7] opacity-40"></div>
@@ -349,7 +349,7 @@ const UseCasesSection = ({ theme }) => {
           {useCases.map((useCase, idx) => (
             <div key={idx} className="flex flex-col items-center text-center">
               <div className="w-24 h-24 rounded-full bg-white flex items-center justify-center mb-4">
-                <img src={useCase.icon} alt={useCase.title} className="w-12 h-12 object-contain" />
+                <img src={useCase.icon} loading="lazy" alt={useCase.title} className="w-12 h-12 object-contain" />
               </div>
               <div className="font-bold text-base text-black mb-2">{idx + 1}. {useCase.title}</div>
               <div className="text-sm text-black leading-relaxed">{useCase.desc}</div>

@@ -126,6 +126,7 @@ const EditorsPicks = ({ links }) => {
                   <img
                     src={item.image}
                     alt={item.title}
+                    loading="lazy"
                     className="w-full h-full object-cover rounded-2xl"
                   />
                 </div>
@@ -299,7 +300,7 @@ const AIMythsBusted = () => (
         transition={{ duration: 0.6 }}
         className="w-full md:w-1/2 flex justify-center items-center mb-8 md:mb-0 min-h-[550px]"
       >
-        <img src={aiImg} alt="AI" className="w-full max-w-xl h-auto object-contain" />
+        <img src={aiImg} loading="lazy" alt="AI" className="w-full max-w-xl h-auto object-contain" />
       </motion.div>
       {/* Right: Myths and Facts */}
       <motion.div 

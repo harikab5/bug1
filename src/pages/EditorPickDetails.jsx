@@ -149,6 +149,7 @@ const EditorPickDetails = () => {
         <div className="w-full max-w-2xl px-4">
           <img
             src={pick.image}
+            loading="lazy"
             alt={pick.title}
             className="w-full h-96 object-cover rounded-lg shadow-lg"
           />

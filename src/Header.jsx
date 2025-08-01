@@ -61,7 +61,7 @@ export default function Header({ theme, toggleTheme }) {
           onClick={() => handleNavigation('/home1')}
           className="cursor-pointer hover:scale-105 transition-transform duration-300"
         >
-          <img src={logo} alt="Logo" className="h-14 md:h-[60px] w-auto object-contain drop-shadow-[0_0_10px_#19e6f7]" />
+          <img src={logo} loading="lazy" alt="Logo" className="h-14 md:h-[60px] w-auto object-contain drop-shadow-[0_0_10px_#19e6f7]" />
         </button>
       </div>
       {/* Nav and Avatar aligned right */}

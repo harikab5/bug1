@@ -227,7 +227,7 @@ const AboutUs = () => {
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch gap-12">
           {/* Left Side: Only Image */}
           <div className="lg:w-2/5 w-full mb-8 lg:mb-0 flex items-center justify-center">
-            <img src={ourvalues} alt="Our Values" className="w-full min-h-[500px] h-[500px] rounded-xl shadow-lg object-cover" />
+            <img src={ourvalues} loading="lazy" alt="Our Values" className="w-full min-h-[500px] h-[500px] rounded-xl shadow-lg object-cover" />
           </div>
           {/* Right Side: Value Cards Grid */}
           <div className="lg:w-3/5 w-full grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -289,7 +289,7 @@ const AboutUs = () => {
           </div>
           {/* Right Side: Image */}
           <div className="lg:w-1/2 w-full flex items-center justify-center">
-            <img src={ideasImg} alt="What We Think" className="w-full max-w-2xl h-[500px] rounded-2xl shadow-lg object-cover" />
+            <img src={ideasImg} loading="lazy" alt="What We Think" className="w-full max-w-2xl h-[500px] rounded-2xl shadow-lg object-cover" />
           </div>
         </div>
       </section>

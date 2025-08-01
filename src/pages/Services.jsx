@@ -206,17 +206,17 @@ const services = [
               <div className="md:w-1/2 w-full flex justify-center items-center">
                 <div className="w-full h-80 flex items-center justify-center bg-[#bfc1be] rounded-2xl shadow-lg">
                   {service.id === 1 ? (
-                    <img src={aiChatbotsImg} alt={service.title} className="w-full h-full object-cover rounded-2xl" />
+                    <img src={aiChatbotsImg} loading="lazy" alt={service.title} className="w-full h-full object-cover rounded-2xl" />
                   ) : service.id === 2 ? (
-                    <img src={computerVisionImg} alt={service.title} className="w-full h-full object-cover rounded-2xl" />
+                    <img src={computerVisionImg} loading="lazy" alt={service.title} className="w-full h-full object-cover rounded-2xl" />
                   ) : service.id === 3 ? (
-                    <img src={dataAnalysisImg} alt={service.title} className="w-full h-full object-cover rounded-2xl" />
+                    <img src={dataAnalysisImg} loading="lazy" alt={service.title} className="w-full h-full object-cover rounded-2xl" />
                   ) : service.id === 4 ? (
-                    <img src={nlpImg} alt={service.title} className="w-full h-full object-cover rounded-2xl" />
+                    <img src={nlpImg} loading="lazy" alt={service.title} className="w-full h-full object-cover rounded-2xl" />
                   ) : service.id === 5 ? (
-                    <img src={automationImg} alt={service.title} className="w-full h-full object-cover rounded-2xl" />
+                    <img src={automationImg} loading="lazy" alt={service.title} className="w-full h-full object-cover rounded-2xl" />
                   ) : service.id === 6 ? (
-                    <img src={contentCodeImg} alt={service.title} className="w-full h-full object-cover rounded-2xl" />
+                    <img src={contentCodeImg} loading="lazy" alt={service.title} className="w-full h-full object-cover rounded-2xl" />
                   ) : (
                     <service.icon className="text-[#27bdb5] text-8xl" />
                   )}
@@ -289,13 +289,13 @@ const services = [
                       {/* Icon Container - increased size */}
                                                <div className="w-64 h-40 bg-gradient-to-r from-[#0a2342] to-[#27bdb5] rounded-xl flex items-center justify-center">
                         {method.step === "01" ? (
-                          <img src={discoveryAnalysisImg} alt="Discovery & Analysis" className="w-full h-full object-cover rounded-lg" />
+                          <img src={discoveryAnalysisImg} loading="lazy" alt="Discovery & Analysis" className="w-full h-full object-cover rounded-lg" />
                         ) : method.step === "02" ? (
-                          <img src={strategyPlanningImg} alt="Strategy & Planning" className="w-full h-full object-cover rounded-lg" />
+                          <img src={strategyPlanningImg} loading="lazy" alt="Strategy & Planning" className="w-full h-full object-cover rounded-lg" />
                         ) : method.step === "03" ? (
-                          <img src={developmentTrainingImg} alt="Development & Training" className="w-full h-full object-cover rounded-lg" />
+                          <img src={developmentTrainingImg} loading="lazy" alt="Development & Training" className="w-full h-full object-cover rounded-lg" />
                         ) : method.step === "04" ? (
-                          <img src={deploymentSupportImg} alt="Deployment & Support" className="w-full h-full object-cover rounded-lg" />
+                          <img src={deploymentSupportImg} loading="lazy" alt="Deployment & Support" className="w-full h-full object-cover rounded-lg" />
                         ) : (
                           <method.icon className="text-white text-4xl" />
                         )}
@@ -325,7 +325,7 @@ const services = [
             <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Industry 1 */}
               <div className="relative w-full h-[32rem] group overflow-hidden">
-                <img src={manufacturingImg} alt="Manufacturing" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={manufacturingImg} loading="lazy" alt="Manufacturing" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#062731cc] to-transparent opacity-80 group-hover:opacity-90 transition duration-300"></div>
                                   <div className="absolute bottom-0 left-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-full group-hover:translate-y-0">
                     <h3 className="text-2xl font-bold text-white mb-2">Manufacturing</h3>
@@ -336,7 +336,7 @@ const services = [
               </div>
               {/* Industry 2 */}
               <div className="relative w-full h-[32rem] group overflow-hidden">
-                <img src={healthcareImg} alt="Healthcare" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src={healthcareImg} loading="lazy" alt="Healthcare" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-80 group-hover:opacity-90 transition duration-300"></div>
                                   <div className="absolute bottom-0 left-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-full group-hover:translate-y-0">
                     <h3 className="text-2xl font-bold text-white mb-2">Healthcare</h3>
@@ -347,7 +347,7 @@ const services = [
               </div>
               {/* Industry 3 */}
               <div className="relative w-full h-[32rem] group overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80" alt="Logistics" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80" loading="lazy" alt="Logistics" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#29828ecc] to-transparent opacity-80 group-hover:opacity-90 transition duration-300"></div>
                                   <div className="absolute bottom-0 left-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-full group-hover:translate-y-0">
                     <h3 className="text-2xl font-bold text-white mb-2">Logistics</h3>
@@ -358,7 +358,7 @@ const services = [
               </div>
               {/* Industry 4 with overlay */}
               <div className="relative w-full h-[32rem] group overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Retail" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" loading="lazy" alt="Retail" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#111211cc] to-transparent opacity-80 group-hover:opacity-90 transition duration-300"></div>
                                   <div className="absolute bottom-0 left-6 right-6 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-full group-hover:translate-y-0">
                     <h3 className="text-2xl font-bold text-white mb-2">Retail & eCommerce</h3>
@@ -549,6 +549,7 @@ const services = [
               <div className="relative w-full max-w-md">
                 <img 
                   src={serviceCtaImg} 
+                  loading="lazy"
                   alt="AI Services CTA" 
                   className="w-full h-auto rounded-2xl shadow-2xl object-cover"
                   style={{maxHeight: '500px', filter: 'brightness(1.1)' }}

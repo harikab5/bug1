@@ -30,7 +30,7 @@ export default function Footer({ theme }) {
         <div className="flex flex-col md:flex-row items-start justify-between gap-8">
           {/* Company Info & Social */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
-            <img src={logo} alt="Logo" className="h-16 md:h-20 w-auto mb-4 md:pr-20 md:-ml-14 md:-mt-6" />
+            <img src={logo} loading="lazy" alt="Logo" className="h-16 md:h-20 w-auto mb-4 md:pr-20 md:-ml-14 md:-mt-6" />
             <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">AI Tools Company</h3>
             <p className={theme === "dark" ? "text-gray-300 text-sm leading-relaxed mb-6 max-w-xs" : "text-black text-sm leading-relaxed mb-6 max-w-xs"}>
               Leading the future with cutting-edge AI tools and solutions.

@@ -121,7 +121,7 @@ const Contact = () => {
         <section ref={formRef} className="w-full flex flex-col md:flex-row shadow-xl overflow-hidden" style={{background: '#000000'}}>
           {/* Left Column - Image */}
           <div className={`md:w-1/2 w-full flex items-start justify-center p-0 pt-8 md:pt-12 ${theme === 'dark' ? 'bg-transparent' : 'bg-white'}`}>
-            <img src={formImg} alt="Contact Visual" className="object-cover w-full rounded-none md:rounded-r-2xl" style={{maxHeight: '700px'}} />
+            <img src={formImg} loading="lazy" alt="Contact Visual" className="object-cover w-full rounded-none md:rounded-r-2xl" style={{maxHeight: '700px'}} />
           </div>
           {/* Right Column - Form */}
           <div className={`md:w-1/2 w-full flex flex-col justify-start p-8 md:p-12 ${theme === 'dark' ? '' : 'bg-white'}`}>
@@ -275,7 +275,7 @@ const Contact = () => {
           {/* Visit Us */}
           <div className={`flex flex-col items-center text-center p-8 border-r md:border-r md:border-[#222] last:border-none ${theme === 'dark' ? '' : 'bg-white'}`}>
             <div className={`w-14 h-14 mb-4 object-contain rounded-full flex items-center justify-center ${theme === 'dark' ? '' : 'bg-white'}`}>
-              <img src={help1} alt="Visit Us" className="w-14 h-14 object-contain rounded-lg" />
+              <img src={help1} loading="lazy" alt="Visit Us" className="w-14 h-14 object-contain rounded-lg" />
             </div>
             <h3 className="text-lg font-bold mb-2 tracking-wider" style={{color: '#04D9FF'}}>VISIT US</h3>
             <p className={`mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
@@ -288,7 +288,7 @@ const Contact = () => {
           {/* Call Us */}
           <div className={`flex flex-col items-center text-center p-8 border-r md:border-r md:border-[#222] last:border-none ${theme === 'dark' ? '' : 'bg-white'}`}>
             <div className={`w-14 h-14 mb-4 object-contain rounded-full flex items-center justify-center ${theme === 'dark' ? '' : 'bg-white'}`}>
-              <img src={help2} alt="Call Us" className="w-14 h-14 object-contain rounded-lg" />
+              <img src={help2} loading="lazy" alt="Call Us" className="w-14 h-14 object-contain rounded-lg" />
             </div>
             <h3 className="text-lg font-bold mb-2 tracking-wider" style={{color: '#04D9FF'}}>CALL US</h3>
             <p className={`mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
@@ -301,7 +301,7 @@ const Contact = () => {
           {/* Contact Us */}
           <div className={`flex flex-col items-center text-center p-8 ${theme === 'dark' ? '' : 'bg-white'}`}>
             <div className={`w-14 h-14 mb-4 object-contain rounded-full flex items-center justify-center ${theme === 'dark' ? '' : 'bg-white'}`}>
-              <img src={help3} alt="Contact Us" className="w-14 h-14 object-contain rounded-lg" />
+              <img src={help3} loading="lazy" alt="Contact Us" className="w-14 h-14 object-contain rounded-lg" />
             </div>
             <h3 className="text-lg font-bold mb-2 tracking-wider" style={{color: '#04D9FF'}}>CONTACT US</h3>
             <p className={`mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>

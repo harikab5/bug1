@@ -129,7 +129,7 @@ const HowItWorksSection = ({ theme }) => {
           {/* Right: Image */}
           <div className="flex-1 flex items-stretch justify-center">
             <div className={`relative w-full max-w-6xl rounded-2xl flex items-center justify-center ${theme === "dark" ? "bg-[#1a1a1a]" : "bg-white"}`} style={{boxShadow:'0 0 0 2px #19e6f7/20'}}>
-              <img src={howItWorksImg} alt="How it works" className="w-full h-full object-cover rounded-xl" />
+              <img src={howItWorksImg} loading="lazy" alt="How it works" className="w-full h-full object-cover rounded-xl" />
             </div>
           </div>
         </div>
@@ -222,7 +222,7 @@ const BenefitsSection = ({ theme }) => {
         {/* Left: Image/Illustration */}
         <div className="flex-1 flex items-center justify-center h-full">
           <div className="relative p-2 h-full flex items-center">
-            <img src={agentImg} alt="Content & Code Tools" className="w-full h-full object-cover rounded-2xl shadow-xl relative z-10" style={{minHeight: '400px'}} />
+            <img src={agentImg} loading="lazy" alt="Content & Code Tools" className="w-full h-full object-cover rounded-2xl shadow-xl relative z-10" style={{minHeight: '400px'}} />
             {/* Glowing blue-teal border effect */}
             <div className="absolute inset-0 rounded-2xl border-2 border-[#19e6f7] shadow-[0_0_20px_rgba(25,230,247,0.6)]"></div>
           </div>
@@ -353,7 +353,7 @@ const UseCasesSection = ({ theme }) => {
                         {steps.map((step, index) => (
                           <div key={index} className="flex flex-col items-center transition duration-300 ease-in-out hover:shadow-lg cursor-pointer">
                             <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border-2 border-[#19e6f7] bg-white flex items-center justify-center z-10">
-                              <img src={step.icon} alt={step.title} className="w-12 h-12 md:w-14 md:h-14 object-contain" />
+                              <img src={step.icon} loading="lazy" alt={step.title} className="w-12 h-12 md:w-14 md:h-14 object-contain" />
                             </div>
                             <div className="text-base md:text-lg font-bold mt-2 mb-1 text-black text-center px-2"><span>{index + 1}. </span>{step.title}</div>
                             <div className="text-xs md:text-sm text-center text-black px-4">{step.desc}</div>

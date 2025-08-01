@@ -112,7 +112,7 @@ export default function Signup() {
           {/* Logo */}
           <div className="relative flex justify-center items-center mb-8">
             <div className={`${theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-white'} p-4 rounded-full`}>
-              <img src={logo} alt="Logo" className="h-16 w-auto" />
+              <img src={logo} loading="lazy" alt="Logo" className="h-16 w-auto" />
             </div>
             <button
               onClick={toggleTheme}
@@ -244,7 +244,7 @@ export default function Signup() {
 
       {/* Right: Image */}
       <div className="hidden md:block w-1/2 min-h-screen">
-        <img src={welcomeBg} alt="Welcome" className="w-full h-full object-cover" />
+        <img src={welcomeBg} loading="lazy" alt="Welcome" className="w-full h-full object-cover" />
       </div>
     </div>
   );
