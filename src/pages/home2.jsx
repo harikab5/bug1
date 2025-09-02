@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useLanguage } from "../context/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import heroVideo from "../assets/SecondHome/home2.mp4";
 import { useTheme } from "../context/ThemeContext";
@@ -49,6 +50,7 @@ function ExpertCard({ img, name, title, bio }) {
 
 const SecondHome = () => {
   const { theme } = useTheme();
+  const { language } = useLanguage();
   const navigate = useNavigate();
   const webinarCarouselRef = useRef(null);
   const [currentExpertIndex, setCurrentExpertIndex] = useState(0);
@@ -121,12 +123,96 @@ const SecondHome = () => {
 
   // Expert data
   const experts = [
-    { img: drAlexCarter, name: 'Dr. Alex Carter', title: 'Lead AI Scientist', bio: 'Expert in machine learning and automation, with 10+ years in AI research and deployment.' },
-    { img: priyaSingh, name: 'Priya Singh', title: 'Chief Data Officer', bio: 'Specialist in data analytics and security, helping businesses unlock actionable insights.' },
-    { img: miguelTorres, name: 'Miguel Torres', title: 'AI Solutions Architect', bio: 'Architect of scalable AI systems, passionate about innovation and client success.' },
-    { img: lindaZhao, name: 'Linda Zhao', title: 'Data Science Lead', bio: 'Leads data science teams to deliver actionable insights and drive business growth.' },
-    { img: ethanKim, name: 'Ethan Kim', title: 'AI Product Manager', bio: 'Bridges the gap between business and technology, delivering user-focused AI products.' },
-    // { img: sofiaMuller, name: 'Sofia Müller', title: 'Cloud AI Engineer', bio: 'Cloud-native AI specialist, ensuring seamless integration and deployment for clients worldwide.' }
+    {
+      img: drAlexCarter,
+      name: {
+        en: 'Dr. Alex Carter',
+        ar: 'د. أليكس كارتر',
+        he: 'ד"ר אלכס קרטר',
+      },
+      title: {
+        en: 'Lead AI Scientist',
+        ar: 'رئيس علماء الذكاء الاصطناعي',
+        he: 'מדען ראשי ל-AI',
+      },
+      bio: {
+        en: 'Expert in machine learning and automation, with 10+ years in AI research and deployment.',
+        ar: 'خبير في التعلم الآلي والأتمتة، مع أكثر من 10 سنوات في أبحاث وتطبيقات الذكاء الاصطناعي.',
+        he: 'מומחה ללמידת מכונה ואוטומציה, עם מעל 10 שנות ניסיון במחקר ויישום AI.',
+      }
+    },
+    {
+      img: priyaSingh,
+      name: {
+        en: 'Priya Singh',
+        ar: 'بريا سينغ',
+        he: 'פריה סינג',
+      },
+      title: {
+        en: 'Chief Data Officer',
+        ar: 'رئيسة قسم البيانات',
+        he: 'מנהלת נתונים ראשית',
+      },
+      bio: {
+        en: 'Specialist in data analytics and security, helping businesses unlock actionable insights.',
+        ar: 'متخصصة في تحليلات البيانات والأمان، تساعد الشركات في اكتساب رؤى قابلة للتنفيذ.',
+        he: 'מומחית לניתוח נתונים ואבטחה, מסייעת לעסקים להפיק תובנות מעשיות.',
+      }
+    },
+    {
+      img: miguelTorres,
+      name: {
+        en: 'Miguel Torres',
+        ar: 'ميغيل توريس',
+        he: 'מיגל טורס',
+      },
+      title: {
+        en: 'AI Solutions Architect',
+        ar: 'مهندس حلول الذكاء الاصطناعي',
+        he: 'ארכיטקט פתרונות AI',
+      },
+      bio: {
+        en: 'Architect of scalable AI systems, passionate about innovation and client success.',
+        ar: 'مهندس أنظمة ذكاء اصطناعي قابلة للتوسع، شغوف بالابتكار ونجاح العملاء.',
+        he: 'ארכיטקט מערכות AI בקנה מידה גדול, נלהב לחדשנות והצלחת לקוחות.',
+      }
+    },
+    {
+      img: lindaZhao,
+      name: {
+        en: 'Linda Zhao',
+        ar: 'ليندا تشاو',
+        he: 'לינדה ג׳או',
+      },
+      title: {
+        en: 'Data Science Lead',
+        ar: 'قائدة علوم البيانات',
+        he: 'ראש צוות מדעי נתונים',
+      },
+      bio: {
+        en: 'Leads data science teams to deliver actionable insights and drive business growth.',
+        ar: 'تقود فرق علوم البيانات لتقديم رؤى قابلة للتنفيذ ودفع نمو الأعمال.',
+        he: 'מנהלת צוותי מדעי נתונים להפקת תובנות ולצמיחה עסקית.',
+      }
+    },
+    {
+      img: ethanKim,
+      name: {
+        en: 'Ethan Kim',
+        ar: 'إيثان كيم',
+  he: "אית'ן קים",
+      },
+      title: {
+        en: 'AI Product Manager',
+        ar: 'مدير منتجات الذكاء الاصطناعي',
+        he: 'מנהל מוצרי AI',
+      },
+      bio: {
+        en: 'Bridges the gap between business and technology, delivering user-focused AI products.',
+        ar: 'يجسر الفجوة بين الأعمال والتكنولوجيا، ويقدم منتجات ذكاء اصطناعي تركز على المستخدم.',
+        he: 'מחבר בין עסקים לטכנולוגיה, מספק מוצרי AI ממוקדי משתמש.',
+      }
+    },
   ];
 
   const nextExpert = () => {
@@ -154,62 +240,137 @@ const SecondHome = () => {
   // Webinar data for the calendar grid
   const webinarData = [
     {
-      date: "June 28, 2024",
-      title: "AI in Action: Transforming Business Operations",
-      description: "Join our experts for a live session on how AI is revolutionizing workflows, boosting productivity, and driving innovation across industries.",
-      time: "4:00 PM GMT"
+      date: {
+        en: "June 28, 2024",
+        ar: "28 يونيو 2024",
+        he: "28 ביוני 2024",
+      },
+      title: {
+        en: "AI in Action: Transforming Business Operations",
+        ar: "الذكاء الاصطناعي في العمل: تحويل العمليات التجارية",
+        he: "AI בפעולה: שינוי תהליכים עסקיים",
+      },
+      description: {
+        en: "Join our experts for a live session on how AI is revolutionizing workflows, boosting productivity, and driving innovation across industries.",
+        ar: "انضم إلى خبرائنا لجلسة مباشرة حول كيفية قيام الذكاء الاصطناعي بثورة في سير العمل وزيادة الإنتاجية ودفع الابتكار عبر الصناعات.",
+        he: "הצטרפו למומחים שלנו למפגש חי על איך AI משנה תהליכי עבודה, מגביר פרודוקטיביות ומניע חדשנות בענפים שונים.",
+      },
+      time: {
+        en: "4:00 PM GMT",
+        ar: "4:00 مساءً بتوقيت غرينتش",
+        he: "16:00 GMT",
+      }
     },
     {
-      date: "July 12, 2024",
-      title: "NLP for Business: Unlocking Language Data",
-      description: "Discover how natural language processing is transforming customer insights and automating communication.",
-      time: "3:00 PM GMT"
+      date: {
+        en: "July 12, 2024",
+        ar: "12 يوليو 2024",
+        he: "12 ביולי 2024",
+      },
+      title: {
+        en: "NLP for Business: Unlocking Language Data",
+        ar: "معالجة اللغة الطبيعية للأعمال: فتح بيانات اللغة",
+        he: "NLP לעסקים: פתיחת נתוני שפה",
+      },
+      description: {
+        en: "Discover how natural language processing is transforming customer insights and automating communication.",
+        ar: "اكتشف كيف تغير معالجة اللغة الطبيعية رؤى العملاء وتؤتمت التواصل.",
+        he: "גלו כיצד עיבוד שפה טבעית משנה תובנות לקוח ומאוטומט תקשורת.",
+      },
+      time: {
+        en: "3:00 PM GMT",
+        ar: "3:00 مساءً بتوقيت غرينتش",
+        he: "15:00 GMT",
+      }
     },
     {
-      date: "July 26, 2024",
-      title: "Automation & Workflow Tools in Practice",
-      description: "See real-world examples of how automation is streamlining business processes and saving time.",
-      time: "5:00 PM GMT"
+      date: {
+        en: "July 26, 2024",
+        ar: "26 يوليو 2024",
+        he: "26 ביולי 2024",
+      },
+      title: {
+        en: "Automation & Workflow Tools in Practice",
+        ar: "أدوات الأتمتة وسير العمل في التطبيق العملي",
+        he: "כלי אוטומציה וזרימות עבודה בפועל",
+      },
+      description: {
+        en: "See real-world examples of how automation is streamlining business processes and saving time.",
+        ar: "شاهد أمثلة واقعية حول كيفية تبسيط الأتمتة للعمليات التجارية وتوفير الوقت.",
+        he: "ראו דוגמאות אמיתיות כיצד אוטומציה מייעלת תהליכים עסקיים וחוסכת זמן.",
+      },
+      time: {
+        en: "5:00 PM GMT",
+        ar: "5:00 مساءً بتوقيت غرينتش",
+        he: "17:00 GMT",
+      }
     },
     {
-      date: "August 9, 2024",
-      title: "Data Analysis & Forecasting with AI",
-      description: "Learn how to turn raw data into actionable insights and accurate forecasts using AI analytics.",
-      time: "2:00 PM GMT"
+      date: {
+        en: "August 9, 2024",
+        ar: "9 أغسطس 2024",
+        he: "9 באוגוסט 2024",
+      },
+      title: {
+        en: "Data Analysis & Forecasting with AI",
+        ar: "تحليل البيانات والتنبؤ بالذكاء الاصطناعي",
+        he: "ניתוח נתונים וחיזוי עם AI",
+      },
+      description: {
+        en: "Learn how to turn raw data into actionable insights and accurate forecasts using AI analytics.",
+        ar: "تعلم كيفية تحويل البيانات الخام إلى رؤى قابلة للتنفيذ وتوقعات دقيقة باستخدام تحليلات الذكاء الاصطناعي.",
+        he: "למדו כיצד להפוך נתונים גולמיים לתובנות מעשיות ולתחזיות מדויקות באמצעות ניתוחי AI.",
+      },
+      time: {
+        en: "2:00 PM GMT",
+        ar: "2:00 مساءً بتوقيت غرينتش",
+        he: "14:00 GMT",
+      }
     },
-    // Add more webinars as needed
   ];
 
   const WebinarFeaturedList = () => {
     const [featured, ...others] = webinarData;
+    const t = {
+      upcomingWebinars: {
+        en: "Upcoming Webinars",
+        ar: "الندوات القادمة",
+        he: "וובינרים קרובים",
+      },
+      register: {
+        en: "Register",
+        ar: "سجل الآن",
+        he: "הרשמה",
+      },
+    };
     return (
       <section className="py-20 px-4 min-h-[400px] flex flex-col items-center justify-center bg-gradient-to-br from-[#19bba6] to-[#0a2342]">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center">Upcoming <span className="text-[#19e6f7]">Webinars</span></h2>
+        <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-10 text-center">{t.upcomingWebinars[language.code]}</h2>
         {/* Featured Webinar */}
         <div className={`max-w-3xl w-full rounded-2xl shadow-2xl p-8 mb-10 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl ${theme === 'dark' ? 'bg-[#232323]' : 'bg-white'}`}>
-          <div className="text-[#19e6f7] text-lg font-bold mb-2">{featured.date} &bull; {featured.time}</div>
-          <div className={`text-2xl md:text-3xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{featured.title}</div>
-          <p className={`mb-6 ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>{featured.description}</p>
+          <div className="text-[#19e6f7] text-lg font-bold mb-2">{featured.date[language.code]} &bull; {featured.time[language.code]}</div>
+          <div className={`text-2xl md:text-3xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{featured.title[language.code]}</div>
+          <p className={`mb-6 ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>{featured.description[language.code]}</p>
           <button 
-            onClick={() => handleRegisterClick(featured.title)}
+            onClick={() => handleRegisterClick(featured.title[language.code])}
             className="inline-block font-bold text-lg px-10 py-4 rounded-lg shadow transition text-white hover:scale-105" 
             style={{background: 'linear-gradient(135deg, #0a3a4a 0%, #179b8e 100%)'}}
           >
-            Register
+            {t.register[language.code]}
           </button>
         </div>
         {/* List of Other Webinars */}
         <div className="max-w-6xl w-full flex flex-row gap-6 justify-center items-stretch">
           {others.map((webinar, idx) => (
             <div key={idx} className={`flex-1 max-w-xs rounded-2xl shadow-xl p-6 flex flex-col items-center text-center transition-transform duration-300 hover:scale-105 hover:shadow-2xl ${theme === 'dark' ? 'bg-[#232323]' : 'bg-white'}`}>
-              <div className="text-[#19e6f7] text-base font-bold mb-1">{webinar.date} &bull; {webinar.time}</div>
-              <div className={`text-lg font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{webinar.title}</div>
+              <div className="text-[#19e6f7] text-base font-bold mb-1">{webinar.date[language.code]} &bull; {webinar.time[language.code]}</div>
+              <div className={`text-lg font-bold mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{webinar.title[language.code]}</div>
               <button 
-                onClick={() => handleRegisterClick(webinar.title)}
+                onClick={() => handleRegisterClick(webinar.title[language.code])}
                 className="mt-4 inline-block font-bold text-base px-6 py-2 rounded-lg shadow transition text-white hover:scale-105" 
                 style={{background: 'linear-gradient(135deg, #0a3a4a 0%, #179b8e 100%)'}}
               >
-                Register
+                {t.register[language.code]}
               </button>
             </div>
           ))}
@@ -245,7 +406,15 @@ const SecondHome = () => {
     return (
       <section className="py-20 px-4" style={{ background: 'linear-gradient(135deg, #0a3a4a 0%, #179b8e 100%)' }}>
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-12 text-center">Future <span className="text-[#19e6f7]">Events</span></h2>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-12 text-center">{{
+            en: 'Future',
+            ar: 'الفعاليات القادمة',
+            he: 'אירועים עתידיים',
+          }[language.code]} <span className="text-[#19e6f7]">{{
+            en: 'Events',
+            ar: 'الفعاليات',
+            he: 'אירועים',
+          }[language.code]}</span></h2>
           
           <div className="relative flex items-center justify-center">
             {/* Left Arrow */}
@@ -291,7 +460,11 @@ const SecondHome = () => {
                        className="inline-block font-bold text-sm px-4 py-2 rounded-lg shadow-lg transition text-white hover:scale-105 text-center" 
                        style={{background: 'linear-gradient(135deg, #0a3a4a 0%, #179b8e 100%)'}}
                      >
-                       Register Now
+                       {{
+                         en: 'Register Now',
+                         ar: 'سجل الآن',
+                         he: 'הרשמה עכשיו',
+                       }[language.code]}
                      </button>
                    </div>
                  </div>
@@ -319,7 +492,11 @@ const SecondHome = () => {
                       className="inline-block font-bold text-sm px-6 py-2 rounded-lg shadow transition text-white text-center hover:scale-105" 
                       style={{background: 'linear-gradient(135deg, #0a3a4a 0%, #179b8e 100%)'}}
                     >
-                      Register Now
+                      {{
+                        en: 'Register Now',
+                        ar: 'سجل الآن',
+                        he: 'הרשמה עכשיו',
+                      }[language.code]}
                     </button>
                   </div>
                 </div>
@@ -346,7 +523,11 @@ const SecondHome = () => {
                        className="inline-block font-bold text-sm px-4 py-2 rounded-lg shadow-lg transition text-white hover:scale-105 text-center" 
                        style={{background: 'linear-gradient(135deg, #0a3a4a 0%, #179b8e 100%)'}}
                      >
-                       Register Now
+                       {{
+                         en: 'Register Now',
+                         ar: 'سجل الآن',
+                         he: 'הרשמה עכשיו',
+                       }[language.code]}
                      </button>
                    </div>
                  </div>
@@ -384,15 +565,35 @@ const SecondHome = () => {
         </video>
         <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-black bg-opacity-60' : ''}`}></div>
         <div className="relative z-10 max-w-3xl px-4 py-8 flex flex-col items-center justify-center text-center mx-auto" style={{textShadow: theme === 'dark' ? '0 2px 16px #000, 0 1px 2px #000' : 'none'}}>
-          <span className="uppercase text-sm font-semibold tracking-widest text-[#19e6f7] mb-6">AI Solutions</span>
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight whitespace-nowrap text-white">Revolutionize Your Workflow with <span style={{color: '#19e6f7'}}>AI</span></h1>
-          <h2 className="text-2xl md:text-2xl font-semibold mb-6 text-white">Harness the power of next-gen artificial intelligence to automate, analyze, and accelerate your business.</h2>
-          <p className="text-lg md:text-xl mb-10 text-white">From task automation to advanced data analytics and intelligent decision-making, our AI tools empower teams to work smarter—not harder. Whether you're a startup or a large enterprise, our scalable AI solutions adapt to your needs and transform the way you operate.</p>
+          <span className="uppercase text-sm font-semibold tracking-widest text-[#19e6f7] mb-6">{{
+            en: 'AI Solutions',
+            ar: 'حلول الذكاء الاصطناعي',
+            he: 'פתרונות AI',
+          }[language.code]}</span>
+          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight whitespace-nowrap text-white">{{
+            en: 'Revolutionize Your Workflow with',
+            ar: 'حوّل سير عملك مع',
+            he: 'הפוך את זרימת העבודה שלך עם',
+          }[language.code]} <span style={{color: '#19e6f7'}}>AI</span></h1>
+          <h2 className="text-2xl md:text-2xl font-semibold mb-6 text-white">{{
+            en: 'Harness the power of next-gen artificial intelligence to automate, analyze, and accelerate your business.',
+            ar: 'استفد من قوة الذكاء الاصطناعي الحديث لأتمتة وتحليل وتسريع أعمالك.',
+            he: 'נצל את כוח ה-AI מהדור הבא לאוטומציה, ניתוח והאצת העסק שלך.',
+          }[language.code]}</h2>
+          <p className="text-lg md:text-xl mb-10 text-white">{{
+            en: `From task automation to advanced data analytics and intelligent decision-making, our AI tools empower teams to work smarter—not harder. Whether you're a startup or a large enterprise, our scalable AI solutions adapt to your needs and transform the way you operate.`,
+            ar: 'من أتمتة المهام إلى تحليلات البيانات المتقدمة واتخاذ القرار الذكي، أدوات الذكاء الاصطناعي لدينا تمكّن الفرق من العمل بذكاء وليس بجهد. سواء كنت شركة ناشئة أو مؤسسة كبيرة، حلولنا القابلة للتوسع تتكيف مع احتياجاتك وتغير طريقة عملك.',
+            he: 'מאוטומציה של משימות ועד ניתוח נתונים מתקדם וקבלת החלטות חכמה, כלי ה-AI שלנו מאפשרים לצוותים לעבוד חכם יותר, לא קשה יותר. בין אם אתה סטארטאפ או ארגון גדול, פתרונות ה-AI שלנו מותאמים לצרכים שלך ומשנים את אופן הפעולה שלך.',
+          }[language.code]}</p>
           <button 
             onClick={() => handleNavigation('/contact-us')}
             className="inline-block px-10 py-4 rounded-full font-bold text-lg text-white hover:scale-105 transition-transform duration-300"
             style={{backgroundColor: '#19e6f7', marginBottom: '0.5rem'}}>
-            Get Started Free
+            {{
+              en: 'Get Started Free',
+              ar: 'ابدأ مجانًا',
+              he: 'התחל בחינם',
+            }[language.code]}
           </button>
         </div>
       </section>
@@ -401,28 +602,46 @@ const SecondHome = () => {
         <div className="max-w-9xl mx-auto flex flex-col md:flex-row items-stretch">
           {/* Left: Heading and Subtitle */}
           <div className="flex-1 flex flex-col justify-start items-start px-12 py-16" style={{ background: theme === 'dark' ? 'linear-gradient(135deg, #0a2342, #1de9b6)' : '#19e6f7', minWidth: 320 }}>
-            <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Why Choose Us?</h2>
-            <h3 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-[#19e6f7]' : 'text-white'}`}>Proven Results & Trusted Excellence</h3>
+            <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{{
+              en: 'Why Choose Us?',
+              ar: 'لماذا تختارنا؟',
+              he: 'למה לבחור בנו?',
+            }[language.code]}</h2>
+            <h3 className={`text-2xl font-bold mb-4 ${theme === 'dark' ? 'text-[#19e6f7]' : 'text-white'}`}>{{
+              en: 'Proven Results & Trusted Excellence',
+              ar: 'نتائج مثبتة وامتياز موثوق',
+              he: 'תוצאות מוכחות ומצוינות אמינה',
+            }[language.code]}</h3>
             <p className={`text-lg mb-4 ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-[#222]'}`}>
-              <div className="text-justify">
-                The numbers speak for themselves. Our track record of delivering exceptional AI solutions has earned us the trust of leading businesses worldwide.
-              </div>
+              <div className="text-justify">{{
+                en: 'The numbers speak for themselves. Our track record of delivering exceptional AI solutions has earned us the trust of leading businesses worldwide.',
+                ar: 'الأرقام تتحدث عن نفسها. سجلنا في تقديم حلول ذكاء اصطناعي استثنائية أكسبنا ثقة الشركات الرائدة حول العالم.',
+                he: 'המספרים מדברים בעד עצמם. ההיסטוריה שלנו במתן פתרונות AI יוצאי דופן זיכתה אותנו באמון עסקים מובילים ברחבי העולם.',
+              }[language.code]}</div>
             </p>
             <p className={`text-base mb-4 ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-[#222]'}`}>
-              <div className="text-justify">
-                From startups to Fortune 500 companies, we've consistently delivered measurable results that drive growth, efficiency, and innovation. Our commitment to excellence is reflected in every project we undertake.
-              </div>
+              <div className="text-justify">{{
+                en: `From startups to Fortune 500 companies, we've consistently delivered measurable results that drive growth, efficiency, and innovation. Our commitment to excellence is reflected in every project we undertake.`,
+                ar: 'من الشركات الناشئة إلى شركات فورتشن 500، قدمنا باستمرار نتائج قابلة للقياس تدفع النمو والكفاءة والابتكار. التزامنا بالتميز ينعكس في كل مشروع نقوم به.',
+                he: 'מסטארטאפים ועד חברות Fortune 500, סיפקנו תוצאות מדידות שמניעות צמיחה, יעילות וחדשנות. המחויבות שלנו למצוינות משתקפת בכל פרויקט.',
+              }[language.code]}</div>
             </p>
             <p className={`text-base mb-6 ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-[#222]'}`}>
-              <div className="text-justify">
-                With cutting-edge AI technology, expert teams, and a customer-first approach, we transform complex challenges into elegant solutions. Our comprehensive suite of AI tools and services ensures that every business, regardless of size, can harness the power of artificial intelligence to achieve their goals.
-              </div>
+              <div className="text-justify">{{
+                en: 'With cutting-edge AI technology, expert teams, and a customer-first approach, we transform complex challenges into elegant solutions. Our comprehensive suite of AI tools and services ensures that every business, regardless of size, can harness the power of artificial intelligence to achieve their goals.',
+                ar: 'بتقنيات الذكاء الاصطناعي المتقدمة، وفرق الخبراء، ونهج يركز على العميل، نحول التحديات المعقدة إلى حلول أنيقة. مجموعتنا الشاملة من أدوات وخدمات الذكاء الاصطناعي تضمن أن كل عمل، بغض النظر عن حجمه، يمكنه الاستفادة من قوة الذكاء الاصطناعي لتحقيق أهدافه.',
+                he: 'עם טכנולוגיית AI מתקדמת, צוותים מומחים וגישה ממוקדת לקוח, אנו הופכים אתגרים מורכבים לפתרונות אלגנטיים. מערך הכלים והשירותים שלנו מבטיח שכל עסק יוכל לנצל את כוח ה-AI להשגת מטרותיו.',
+              }[language.code]}</div>
             </p>
             <button 
               onClick={() => handleNavigation('/about-us')}
               className="inline-block font-bold text-base px-8 py-3 rounded-lg shadow-lg transition text-white hover:scale-105"
               style={{background: '#000'}}>
-              Read More
+              {{
+                en: 'Read More',
+                ar: 'اقرأ المزيد',
+                he: 'קרא עוד',
+              }[language.code]}
             </button>
           </div>
           {/* Right: Stats */}
@@ -433,21 +652,69 @@ const SecondHome = () => {
                 <div className={`w-20 h-20 flex items-center justify-center rounded-full text-2xl font-bold shadow-lg border-4 absolute -left-20 group-hover:scale-110 transition-transform duration-300 ${theme === 'dark' ? 'bg-[#181818] text-white border-white' : 'bg-white text-black border-white'}`}>{i+1}</div>
                 <div className="ml-16 group-hover:scale-105 transition-transform duration-300">
                   <div className={`text-2xl font-bold mb-1 ${theme === 'dark' ? 'text-[#0a2342]' : 'text-[#0a2342]'}`}>{[
-                    '95% Customer Satisfaction',
-                    '88% Faster Project Delivery',
-                    '99.9% Data Security',
-                    '92% Repeat Clients',
-                    '85% Cost Savings',
-                    '100% Uptime',
-                  ][i]}</div>
+                    {
+                      en: '95% Customer Satisfaction',
+                      ar: 'رضا العملاء بنسبة 95%',
+                      he: '95% שביעות רצון לקוחות',
+                    },
+                    {
+                      en: '88% Faster Project Delivery',
+                      ar: 'تسليم المشاريع أسرع بنسبة 88%',
+                      he: '88% אספקת פרויקטים מהירה יותר',
+                    },
+                    {
+                      en: '99.9% Data Security',
+                      ar: 'أمان البيانات بنسبة 99.9%',
+                      he: '99.9% אבטחת נתונים',
+                    },
+                    {
+                      en: '92% Repeat Clients',
+                      ar: '92% من العملاء المتكررين',
+                      he: '92% לקוחות חוזרים',
+                    },
+                    {
+                      en: '85% Cost Savings',
+                      ar: 'توفير التكاليف بنسبة 85%',
+                      he: '85% חיסכון בעלויות',
+                    },
+                    {
+                      en: '100% Uptime',
+                      ar: 'تشغيل مستمر بنسبة 100%',
+                      he: '100% זמן פעולה רציף',
+                    },
+                  ][i][language.code]}</div>
                   <div className={`text-base ${theme === 'dark' ? 'text-[#181818]' : 'text-[#181818]'}`}>{[
-                    'Our clients consistently rate us as excellent for support and results.',
-                    'AI automation helps teams deliver projects ahead of schedule.',
-                    'Enterprise-grade encryption keeps your data safe and compliant.',
-                    'Most of our clients return for new projects and ongoing support.',
-                    'Our automation tools help businesses reduce operational costs.',
-                    'Our cloud-based solutions ensure your business is always online.',
-                  ][i]}</div>
+                    {
+                      en: 'Our clients consistently rate us as excellent for support and results.',
+                      ar: 'عملاؤنا يقيموننا باستمرار على أننا ممتازون في الدعم والنتائج.',
+                      he: 'הלקוחות שלנו מדרגים אותנו מצוין בתמיכה ובתוצאות.',
+                    },
+                    {
+                      en: 'AI automation helps teams deliver projects ahead of schedule.',
+                      ar: 'أتمتة الذكاء الاصطناعي تساعد الفرق على تسليم المشاريع قبل الموعد المحدد.',
+                      he: 'אוטומציה של AI מסייעת לצוותים לספק פרויקטים לפני הזמן.',
+                    },
+                    {
+                      en: 'Enterprise-grade encryption keeps your data safe and compliant.',
+                      ar: 'تشفير من الدرجة المؤسسية يحافظ على بياناتك آمنة ومتوافقة.',
+                      he: 'הצפנה ברמה ארגונית שומרת על הנתונים שלך בטוחים ותואמים.',
+                    },
+                    {
+                      en: 'Most of our clients return for new projects and ongoing support.',
+                      ar: 'معظم عملائنا يعودون لمشاريع جديدة ودعم مستمر.',
+                      he: 'רוב הלקוחות שלנו חוזרים לפרויקטים חדשים ולתמיכה מתמשכת.',
+                    },
+                    {
+                      en: 'Our automation tools help businesses reduce operational costs.',
+                      ar: 'أدوات الأتمتة لدينا تساعد الشركات على تقليل التكاليف التشغيلية.',
+                      he: 'כלי האוטומציה שלנו מסייעים לעסקים להפחית עלויות תפעול.',
+                    },
+                    {
+                      en: 'Our cloud-based solutions ensure your business is always online.',
+                      ar: 'حلولنا السحابية تضمن أن يكون عملك دائمًا متصلاً بالإنترنت.',
+                      he: 'הפתרונות מבוססי ענן שלנו מבטיחים שהעסק שלך תמיד יהיה מחובר.',
+                    },
+                  ][i][language.code]}</div>
                 </div>
               </div>
             ))}
@@ -563,11 +830,23 @@ const SecondHome = () => {
       <section className="py-16 px-4" style={{ background: theme === 'dark' ? '#111211' : '#f5f5f5' }}>
         <div className="max-w-7xl mx-auto flex flex-col items-center">
           <h2 className="text-3xl md:text-4xl font-extrabold mb-8 text-center">
-            <span className={`${theme === 'dark' ? 'text-white' : 'text-black'}`}>Meet Our </span>
-            <span className="text-[#19e6f7]">Experts</span>
+            <span className={`${theme === 'dark' ? 'text-white' : 'text-black'}`}>{{
+              en: 'Meet Our',
+              ar: 'تعرف على',
+              he: 'הכירו את',
+            }[language.code]} </span>
+            <span className="text-[#19e6f7]">{{
+              en: 'Experts',
+              ar: 'الخبراء',
+              he: 'המומחים',
+            }[language.code]}</span>
           </h2>
           <p className={`text-center mb-8 max-w-2xl ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>
-            Connect with our AI specialists and get personalized solutions for your business needs.
+            {{
+              en: 'Connect with our AI specialists and get personalized solutions for your business needs.',
+              ar: 'تواصل مع خبراء الذكاء الاصطناعي لدينا واحصل على حلول مخصصة لاحتياجات عملك.',
+              he: 'התחברו עם מומחי ה-AI שלנו וקבלו פתרונות מותאמים אישית לעסק שלכם.',
+            }[language.code]}
           </p>
           
           {/* Expert Carousel */}
@@ -598,9 +877,9 @@ const SecondHome = () => {
               <div className="transform transition-all duration-500 ease-in-out opacity-60 blur-sm scale-75 -translate-y-8">
                 <ExpertCard 
                   img={experts[getExpertIndex(-1)].img} 
-                  name={experts[getExpertIndex(-1)].name} 
-                  title={experts[getExpertIndex(-1)].title} 
-                  bio={experts[getExpertIndex(-1)].bio} 
+                  name={experts[getExpertIndex(-1)].name[language.code]} 
+                  title={experts[getExpertIndex(-1)].title[language.code]} 
+                  bio={experts[getExpertIndex(-1)].bio[language.code]} 
                 />
               </div>
               
@@ -608,9 +887,9 @@ const SecondHome = () => {
               <div className="transform transition-all duration-500 ease-in-out z-10 scale-110">
                 <ExpertCard 
                   img={experts[currentExpertIndex].img} 
-                  name={experts[currentExpertIndex].name} 
-                  title={experts[currentExpertIndex].title} 
-                  bio={experts[currentExpertIndex].bio} 
+                  name={experts[currentExpertIndex].name[language.code]} 
+                  title={experts[currentExpertIndex].title[language.code]} 
+                  bio={experts[currentExpertIndex].bio[language.code]} 
                 />
               </div>
               
@@ -618,9 +897,9 @@ const SecondHome = () => {
               <div className="transform transition-all duration-500 ease-in-out opacity-60 blur-sm scale-75 -translate-y-8">
                 <ExpertCard 
                   img={experts[getExpertIndex(1)].img} 
-                  name={experts[getExpertIndex(1)].name} 
-                  title={experts[getExpertIndex(1)].title} 
-                  bio={experts[getExpertIndex(1)].bio} 
+                  name={experts[getExpertIndex(1)].name[language.code]} 
+                  title={experts[getExpertIndex(1)].title[language.code]} 
+                  bio={experts[getExpertIndex(1)].bio[language.code]} 
                 />
               </div>
             </div>
@@ -638,19 +917,29 @@ const SecondHome = () => {
           </div>
           {/* Message Content */}
           <div className="flex-1 flex flex-col justify-center items-start text-left text-white max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-lg">Meet Our <span className="text-[#19e6f7]">CEO</span></h2>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-lg">{{
+              en: 'Meet Our',
+              ar: 'تعرف على',
+              he: 'הכירו את',
+            }[language.code]} <span className="text-[#19e6f7]">{{
+              en: 'CEO',
+              ar: 'الرئيس التنفيذي',
+              he: 'המנכ"ל',
+            }[language.code]}</span></h2>
           <p className="text-lg md:text-xl text-white max-w-2xl drop-shadow-lg mb-4">
-            <div className="text-justify">
-              With over 20 years of leadership in the technology sector, our CEO has guided the company through rapid growth and innovation. Their vision for integrating artificial intelligence into everyday business processes has transformed the way we deliver value to our clients. 
-              <br /><br />
-              Under their direction, our team has launched groundbreaking AI solutions that empower organizations to automate workflows, gain actionable insights, and stay ahead in a competitive market. Their commitment to excellence, integrity, and customer success is at the heart of everything we do.
-              <br /><br />
-              Discover how our CEO's passion for technology and people is shaping the future of our company and the industry as a whole.
-            </div>
+            <div className="text-justify">{{
+              en: `With over 20 years of leadership in the technology sector, our CEO has guided the company through rapid growth and innovation. Their vision for integrating artificial intelligence into everyday business processes has transformed the way we deliver value to our clients.\n\nUnder their direction, our team has launched groundbreaking AI solutions that empower organizations to automate workflows, gain actionable insights, and stay ahead in a competitive market. Their commitment to excellence, integrity, and customer success is at the heart of everything we do.\n\nDiscover how our CEO's passion for technology and people is shaping the future of our company and the industry as a whole.`,
+              ar: `مع أكثر من 20 عامًا من القيادة في قطاع التكنولوجيا، قاد الرئيس التنفيذي شركتنا نحو نمو سريع وابتكار. رؤيته لدمج الذكاء الاصطناعي في العمليات التجارية اليومية غيرت طريقة تقديم القيمة لعملائنا.\n\nتحت قيادته، أطلق فريقنا حلول ذكاء اصطناعي رائدة تمكن المؤسسات من أتمتة سير العمل، واكتساب رؤى قابلة للتنفيذ، والبقاء في صدارة المنافسة. التزامه بالتميز والنزاهة ونجاح العملاء هو جوهر كل ما نقوم به.\n\nاكتشف كيف يشكل شغف الرئيس التنفيذي بالتكنولوجيا والناس مستقبل شركتنا والصناعة ككل.`,
+              he: `עם למעלה מ-20 שנות מנהיגות בתחום הטכנולוגיה, המנכ"ל שלנו הוביל את החברה לצמיחה מהירה וחדשנות. החזון שלו לשילוב AI בתהליכים עסקיים יומיומיים שינה את הדרך בה אנו מספקים ערך ללקוחותינו.\n\nבהנהגתו, הצוות שלנו השיק פתרונות AI פורצי דרך שמאפשרים לארגונים לאוטומט זרימות עבודה, להפיק תובנות ולהישאר מובילים בשוק תחרותי. המחויבות שלו למצוינות, יושרה והצלחת לקוחות היא בלב כל מה שאנו עושים.\n\nגלו כיצד התשוקה של המנכ"ל שלנו לטכנולוגיה ולאנשים מעצבת את עתיד החברה והתעשייה כולה.`,
+            }[language.code]}</div>
           </p>
             <div className="mt-4">
               <div className="text-xl font-bold">Demish Tornado</div>
-              <div className="text-[#e0dbe6] text-base">CEO & Founder</div>
+              <div className="text-[#e0dbe6] text-base">{{
+                en: 'CEO & Founder',
+                ar: 'الرئيس التنفيذي والمؤسس',
+                he: 'מנכ"ל ומייסד',
+              }[language.code]}</div>
             </div>
           </div>
         </div>
@@ -659,57 +948,109 @@ const SecondHome = () => {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-5 ml-30">
           {/* Left: Heading, para, button */}
           <div className="flex-1 flex flex-col items-start justify-center mb-10 md:mb-0">
-            <h2 className={`text-4xl md:text-5xl font-extrabold mb-3 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Insights</h2>
-            <div className="text-[#19e6f7] text-lg font-semibold ">Your source for practical AI knowledge</div>
+            <h2 className={`text-4xl md:text-5xl font-extrabold mb-3 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{{
+              en: 'Insights',
+              ar: 'رؤى',
+              he: 'תובנות',
+            }[language.code]}</h2>
+            <div className="text-[#19e6f7] text-lg font-semibold ">{{
+              en: 'Your source for practical AI knowledge',
+              ar: 'مصدر المعرفة العملية للذكاء الاصطناعي',
+              he: 'המקור שלך לידע AI מעשי',
+            }[language.code]}</div>
             <p className={`text-md md:text-lg mb-2 max-w-2xl ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-black'}`}>
-              <div className="text-justify">
-                Stay ahead with the latest trends, tips, and real-world stories about AI, automation, and digital transformation for your business. Explore our expert insights and practical guides to help you succeed in the AI era.
-              </div>
+              <div className="text-justify">{{
+                en: 'Stay ahead with the latest trends, tips, and real-world stories about AI, automation, and digital transformation for your business. Explore our expert insights and practical guides to help you succeed in the AI era.',
+                ar: 'ابق في المقدمة مع أحدث الاتجاهات والنصائح والقصص الواقعية حول الذكاء الاصطناعي والأتمتة والتحول الرقمي لعملك. استكشف رؤى خبرائنا والأدلة العملية لمساعدتك على النجاح في عصر الذكاء الاصطناعي.',
+                he: 'הישארו מובילים עם הטרנדים, הטיפים והסיפורים האמיתיים האחרונים על AI, אוטומציה ודיגיטציה לעסק שלכם. גלו את התובנות והמדריכים המעשיים שלנו להצלחה בעידן ה-AI.',
+              }[language.code]}</div>
             </p>
             <p className={`text-md md:text-lg mb-6 max-w-2xl ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-black'}`}>
-              <div className="text-justify">
-                Discover how leading companies are leveraging AI to drive innovation and achieve measurable results.
-              </div>
+              <div className="text-justify">{{
+                en: 'Discover how leading companies are leveraging AI to drive innovation and achieve measurable results.',
+                ar: 'اكتشف كيف تستفيد الشركات الرائدة من الذكاء الاصطناعي لدفع الابتكار وتحقيق نتائج قابلة للقياس.',
+                he: 'גלו כיצד חברות מובילות מנצלות את ה-AI לקידום חדשנות והשגת תוצאות מדידות.',
+              }[language.code]}</div>
             </p>
             <ul className={`mb-8 pl-5 list-disc text-base space-y-2 ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-black'}`}>
-              <li>Real-world case studies and success stories</li>
-              <li>Actionable AI implementation tips</li>
-              <li>Security, compliance, and best practices</li>
+              <li>{{
+                en: 'Real-world case studies and success stories',
+                ar: 'دراسات حالة واقعية وقصص نجاح',
+                he: 'מחקרי מקרה אמיתיים וסיפורי הצלחה',
+              }[language.code]}</li>
+              <li>{{
+                en: 'Actionable AI implementation tips',
+                ar: 'نصائح عملية لتنفيذ الذكاء الاصطناعي',
+                he: 'טיפים ליישום AI מעשי',
+              }[language.code]}</li>
+              <li>{{
+                en: 'Security, compliance, and best practices',
+                ar: 'الأمان والامتثال وأفضل الممارسات',
+                he: 'אבטחה, תאימות ונהלים מומלצים',
+              }[language.code]}</li>
             </ul>
-            <a href="/blog" className="inline-block font-bold text-lg px-8 py-3 rounded-full shadow transition text-white" style={{background: 'linear-gradient(135deg, #0a3a4a 0%, #19e6f7 100%)'}}>Read More Insights</a>
+            <a href="/blog" className="inline-block font-bold text-lg px-8 py-3 rounded-full shadow transition text-white" style={{background: 'linear-gradient(135deg, #0a3a4a 0%, #19e6f7 100%)'}}>{{
+              en: 'Read More Insights',
+              ar: 'اقرأ المزيد من الرؤى',
+              he: 'קרא עוד תובנות',
+            }[language.code]}</a>
           </div>
           {/* Right: 2x2 grid of cards */}
           <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-0 w-full">
             <div className="bg-[#232323] shadow-2xl p-8 flex flex-col mb-0" style={{background: 'linear-gradient(0deg,rgb(57, 175, 186) 10%,rgb(21, 21, 21) 80%)'}}>
-              <h3 className="text-lg font-bold text-white mb-2">How AI is Changing the Future of Work</h3>
+              <h3 className="text-lg font-bold text-white mb-2">{{
+                en: 'How AI is Changing the Future of Work',
+                ar: 'كيف يغير الذكاء الاصطناعي مستقبل العمل',
+                he: 'איך AI משנה את עתיד העבודה',
+              }[language.code]}</h3>
               <p className="text-[#bfc1be] mb-0">
-                <div className="text-justify">
-                  Explore the latest trends in AI-driven automation and what it means for businesses of all sizes.
-                </div>
+                <div className="text-justify">{{
+                  en: 'Explore the latest trends in AI-driven automation and what it means for businesses of all sizes.',
+                  ar: 'استكشف أحدث الاتجاهات في الأتمتة المدفوعة بالذكاء الاصطناعي وما تعنيه للشركات من جميع الأحجام.',
+                  he: 'גלו את הטרנדים האחרונים באוטומציה מבוססת AI ומה זה אומר לעסקים בכל הגדלים.',
+                }[language.code]}</div>
               </p>
             </div>
             <div className="bg-[#232323]  shadow-2xl p-8 flex flex-col mb-0">
-              <h3 className="text-lg font-bold text-white mb-2">5 Ways to Secure Your Data with AI</h3>
+              <h3 className="text-lg font-bold text-white mb-2">{{
+                en: '5 Ways to Secure Your Data with AI',
+                ar: '5 طرق لتأمين بياناتك باستخدام الذكاء الاصطناعي',
+                he: '5 דרכים לאבטח את הנתונים שלך עם AI',
+              }[language.code]}</h3>
               <p className="text-[#bfc1be] mb-0">
-                <div className="text-justify">
-                  Learn practical strategies for leveraging AI to enhance your organization's data security and compliance.
-                </div>
+                <div className="text-justify">{{
+                  en: `Learn practical strategies for leveraging AI to enhance your organization's data security and compliance.`,
+                  ar: 'تعلم استراتيجيات عملية للاستفادة من الذكاء الاصطناعي لتعزيز أمان بيانات مؤسستك والامتثال.',
+                  he: 'למדו אסטרטגיות מעשיות לשימוש ב-AI לשיפור אבטחת הנתונים והעמידה בדרישות.',
+                }[language.code]}</div>
               </p>
             </div>
             <div className="bg-[#232323]  shadow-2xl p-8 flex flex-col mb-0">
-              <h3 className="text-lg font-bold text-white mb-2">AI Trends to Watch in 2024</h3>
+              <h3 className="text-lg font-bold text-white mb-2">{{
+                en: 'AI Trends to Watch in 2024',
+                ar: 'اتجاهات الذكاء الاصطناعي التي يجب مراقبتها في 2024',
+                he: 'מגמות AI שכדאי לעקוב אחריהן ב-2024',
+              }[language.code]}</h3>
               <p className="text-[#bfc1be] mb-0">
-                <div className="text-justify">
-                  Stay ahead of the curve with the latest trends and predictions in artificial intelligence.
-                </div>
+                <div className="text-justify">{{
+                  en: 'Stay ahead of the curve with the latest trends and predictions in artificial intelligence.',
+                  ar: 'ابق في المقدمة مع أحدث الاتجاهات والتوقعات في الذكاء الاصطناعي.',
+                  he: 'הישארו מובילים עם הטרנדים והתחזיות האחרונות ב-AI.',
+                }[language.code]}</div>
               </p>
             </div>
             <div className="bg-[#232323] shadow-2xl p-8 flex flex-col mb-0" style={{background: 'linear-gradient(0deg, #19e6f7 0%, #232323 80%)'}}>
-              <h3 className="text-lg font-bold text-white mb-2">Getting Started with AI in Your Business</h3>
+              <h3 className="text-lg font-bold text-white mb-2">{{
+                en: 'Getting Started with AI in Your Business',
+                ar: 'البدء باستخدام الذكاء الاصطناعي في عملك',
+                he: 'להתחיל עם AI בעסק שלך',
+              }[language.code]}</h3>
               <p className="text-[#bfc1be] mb-0">
-                <div className="text-justify">
-                  A practical guide to implementing AI solutions and driving digital transformation.
-                </div>
+                <div className="text-justify">{{
+                  en: 'A practical guide to implementing AI solutions and driving digital transformation.',
+                  ar: 'دليل عملي لتنفيذ حلول الذكاء الاصطناعي ودفع التحول الرقمي.',
+                  he: 'מדריך מעשי ליישום פתרונות AI והובלת טרנספורמציה דיגיטלית.',
+                }[language.code]}</div>
               </p>
             </div>
           </div>
@@ -737,10 +1078,18 @@ const SecondHome = () => {
 
             {!submitSuccess ? (
               <>
-                <h2 className="text-2xl font-bold text-center mb-6 text-[#19e6f7]">Event Registration</h2>
+                <h2 className="text-2xl font-bold text-center mb-6 text-[#19e6f7]">{{
+                  en: 'Event Registration',
+                  ar: 'تسجيل الفعالية',
+                  he: 'הרשמה לאירוע',
+                }[language.code]}</h2>
                 {registrationData.event && (
                   <p className="text-center mb-6 text-sm text-gray-400">
-                    Registering for: <span className="font-semibold text-[#19e6f7]">{registrationData.event}</span>
+                    {{
+                      en: 'Registering for:',
+                      ar: 'تسجيل لـ:',
+                      he: 'נרשם ל:',
+                    }[language.code]} <span className="font-semibold text-[#19e6f7]">{registrationData.event}</span>
                   </p>
                 )}
                 
@@ -748,7 +1097,11 @@ const SecondHome = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
-                        First Name *
+                        {{
+                          en: 'First Name *',
+                          ar: 'الاسم الأول *',
+                          he: 'שם פרטי *',
+                        }[language.code]}
                       </label>
                       <input
                         type="text"
@@ -763,7 +1116,11 @@ const SecondHome = () => {
                     </div>
                     <div>
                       <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
-                        Last Name *
+                        {{
+                          en: 'Last Name *',
+                          ar: 'اسم العائلة *',
+                          he: 'שם משפחה *',
+                        }[language.code]}
                       </label>
                       <input
                         type="text"
@@ -780,7 +1137,11 @@ const SecondHome = () => {
 
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
-                      Email *
+                      {{
+                        en: 'Email *',
+                        ar: 'البريد الإلكتروني *',
+                        he: 'אימייל *',
+                      }[language.code]}
                     </label>
                     <input
                       type="email"
@@ -796,7 +1157,11 @@ const SecondHome = () => {
 
                   <div>
                     <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-gray-700'}`}>
-                      Phone
+                      {{
+                        en: 'Phone',
+                        ar: 'رقم الهاتف',
+                        he: 'טלפון',
+                      }[language.code]}
                     </label>
                     <input
                       type="tel"
@@ -814,16 +1179,32 @@ const SecondHome = () => {
                     disabled={isSubmitting}
                     className="w-full bg-gradient-to-r from-[#19e6f7] to-[#19bba6] text-white font-bold py-3 px-6 rounded-lg hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? 'Submitting...' : 'Register for Event'}
+                    {isSubmitting ? {
+                      en: 'Submitting...',
+                      ar: 'جارٍ الإرسال...',
+                      he: 'שולח...',
+                    }[language.code] : {
+                      en: 'Register for Event',
+                      ar: 'سجل في الفعالية',
+                      he: 'הרשם לאירוע',
+                    }[language.code]}
                   </button>
                 </form>
               </>
             ) : (
               <div className="text-center py-8">
                 <div className="text-6xl mb-4">✅</div>
-                <h3 className="text-xl font-bold text-[#19e6f7] mb-2">Registration Successful!</h3>
+                <h3 className="text-xl font-bold text-[#19e6f7] mb-2">{{
+                  en: 'Registration Successful!',
+                  ar: 'تم التسجيل بنجاح!',
+                  he: 'ההרשמה הצליחה!',
+                }[language.code]}</h3>
                 <p className="text-gray-400">
-                  Thank you for registering. We'll send you a confirmation email with event details.
+                  {{
+                    en: `Thank you for registering. We'll send you a confirmation email with event details.`,
+                    ar: 'شكرًا لتسجيلك. سنرسل لك بريدًا إلكترونيًا يحتوي على تفاصيل الفعالية.',
+                    he: 'תודה שנרשמת. נשלח לך מייל אישור עם פרטי האירוע.',
+                  }[language.code]}
                 </p>
               </div>
             )}

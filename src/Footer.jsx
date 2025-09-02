@@ -13,8 +13,76 @@ import {
 import logo from "./assets/logo1.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useScrollToTop } from "./hooks/useScrollToTop";
+import { useLanguage } from "./context/LanguageContext";
 
 export default function Footer({ theme }) {
+  const { language } = useLanguage();
+  const strings = {
+    en: {
+      company: 'AI Tools Company',
+      leading: 'Leading the future with cutting-edge AI tools and solutions.',
+      quickLinks: 'Quick Links',
+      home1: 'Home 1',
+      aboutUs: 'About Us',
+      services: 'Services',
+      blog: 'Blog',
+      contact: 'Contact',
+      ourServices: 'Our Services',
+      getInTouch: 'Get In Touch',
+      phone: '+919390594407',
+      email: 'ai@tools.in',
+      location: 'India',
+      hours: 'Mon - Fri: 9am - 6pm',
+      startJourney: 'Start Your AI Journey',
+      privacy: 'Privacy Policy',
+      terms: 'Terms of Service',
+      cookie: 'Cookie Policy',
+      copyright: `© ${new Date().getFullYear()} AI Tools Company. All rights reserved.`,
+    },
+    ar: {
+      company: 'شركة أدوات الذكاء الاصطناعي',
+      leading: 'قيادة المستقبل بأدوات وحلول الذكاء الاصطناعي المتقدمة.',
+      quickLinks: 'روابط سريعة',
+      home1: 'الصفحة الرئيسية 1',
+      aboutUs: 'معلومات عنا',
+      services: 'الخدمات',
+      blog: 'مدونة',
+      contact: 'اتصل',
+      ourServices: 'خدماتنا',
+      getInTouch: 'تواصل معنا',
+      phone: '+919390594407',
+      email: 'ai@tools.in',
+      location: 'الهند',
+      hours: 'الإثنين - الجمعة: 9 صباحًا - 6 مساءً',
+      startJourney: 'ابدأ رحلتك مع الذكاء الاصطناعي',
+      privacy: 'سياسة الخصوصية',
+      terms: 'شروط الخدمة',
+      cookie: 'سياسة الكوكيز',
+      copyright: `© ${new Date().getFullYear()} شركة أدوات الذكاء الاصطناعي. جميع الحقوق محفوظة.`,
+    },
+    he: {
+      company: 'חברת כלי בינה מלאכותית',
+      leading: 'מובילים את העתיד עם כלי ופתרונות AI מתקדמים.',
+      quickLinks: 'קישורים מהירים',
+      home1: 'בית 1',
+      aboutUs: 'אודות',
+      services: 'שירותים',
+      blog: 'בלוג',
+      contact: 'צור קשר',
+      ourServices: 'השירותים שלנו',
+      getInTouch: 'צור קשר',
+      phone: '+919390594407',
+      email: 'ai@tools.in',
+      location: 'הודו',
+      hours: 'ב׳ - ו׳: 9:00 - 18:00',
+      startJourney: 'התחל את מסע ה-AI שלך',
+      privacy: 'מדיניות פרטיות',
+      terms: 'תנאי שירות',
+      cookie: 'מדיניות עוגיות',
+      copyright: `© ${new Date().getFullYear()} חברת כלי בינה מלאכותית. כל הזכויות שמורות.`,
+    }
+  };
+  const t = strings[language.code] || strings.en;
   const navigate = useNavigate();
   
   // Function to handle navigation with scroll to top
@@ -24,16 +92,16 @@ export default function Footer({ theme }) {
   };
   
   return (
-    <footer className={theme === "dark" ? "bg-[#181818] text-gray-300" : "bg-gray-100 text-gray-900"}>
+  <footer className={theme === "dark" ? "bg-[#181818] text-gray-300" : "bg-gray-100 text-gray-900"} dir={language.dir}>
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="flex flex-col md:flex-row items-start justify-between gap-8">
           {/* Company Info & Social */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
             <img src={logo} loading="lazy" alt="Logo" className="h-16 md:h-20 w-auto mb-4 md:pr-20 md:-ml-14 md:-mt-6" />
-            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">AI Tools Company</h3>
+            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">{t.company}</h3>
             <p className={theme === "dark" ? "text-gray-300 text-sm leading-relaxed mb-6 max-w-xs" : "text-black text-sm leading-relaxed mb-6 max-w-xs"}>
-              Leading the future with cutting-edge AI tools and solutions.
+              {t.leading}
             </p>
             <div className="flex gap-4 justify-start">
               {[
@@ -63,15 +131,15 @@ export default function Footer({ theme }) {
           {/* Quick Links */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
             <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">
-              Quick Links
+              {t.quickLinks}
             </h3>
             <ul className="space-y-3">
               {[
-                { label: "Home 1", path: "/home1" },
-                { label: "About Us", path: "/about-us" },
-                { label: "Services", path: "/services" },
-                { label: "Blog", path: "/blog" },
-                { label: "Contact", path: "/contact-us" },
+                { label: t.home1, path: "/home1" },
+                { label: t.aboutUs, path: "/about-us" },
+                { label: t.services, path: "/services" },
+                { label: t.blog, path: "/blog" },
+                { label: t.contact, path: "/contact-us" },
               ].map((link) => (
                 <li key={link.label}>
                   <button
@@ -87,22 +155,64 @@ export default function Footer({ theme }) {
 
           {/* Services */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
-            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">Our Services</h3>
+            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">{t.ourServices}</h3>
             <ul className="space-y-3">
               {[
-                { name: "AI Chatbots & Assistants", path: "/services/ai-chatbots" },
-                { name: "Content & Code Generation", path: "/services/content-generation" },
-                { name: "Data Analysis & Forecasting", path: "/services/data-analysis" },
-                { name: "NLP & Language Intelligence", path: "/services/nlp-intelligence" },
-                { name: "Computer Vision Solutions", path: "/services/computer-vision" },
-                { name: "Automation & Workflow Tools", path: "/services/automation-tools" },
+                {
+                  name: {
+                    en: "AI Chatbots & Assistants",
+                    ar: "الدردشة الذكية والمساعدون",
+                    he: "צ'אטבוטים ועוזרי AI"
+                  },
+                  path: "/services/ai-chatbots"
+                },
+                {
+                  name: {
+                    en: "Content & Code Generation",
+                    ar: "إنشاء المحتوى والبرمجة",
+                    he: "יצירת תוכן וקוד"
+                  },
+                  path: "/services/content-generation"
+                },
+                {
+                  name: {
+                    en: "Data Analysis & Forecasting",
+                    ar: "تحليل البيانات والتنبؤ",
+                    he: "ניתוח נתונים וחיזוי"
+                  },
+                  path: "/services/data-analysis"
+                },
+                {
+                  name: {
+                    en: "NLP & Language Intelligence",
+                    ar: "تحليل اللغة والذكاء اللغوي",
+                    he: "עיבוד שפה וידע לשוני"
+                  },
+                  path: "/services/nlp-intelligence"
+                },
+                {
+                  name: {
+                    en: "Computer Vision Solutions",
+                    ar: "حلول الرؤية الحاسوبية",
+                    he: "פתרונות ראייה ממוחשבת"
+                  },
+                  path: "/services/computer-vision"
+                },
+                {
+                  name: {
+                    en: "Automation & Workflow Tools",
+                    ar: "أدوات الأتمتة وسير العمل",
+                    he: "כלי אוטומציה וזרימות עבודה"
+                  },
+                  path: "/services/automation-tools"
+                }
               ].map((service) => (
-                <li key={service.name}>
+                <li key={service.path}>
                   <button
                     onClick={() => handleNavigation(service.path)}
                     className={(theme === "dark" ? "text-gray-300" : "text-black") + " hover:text-blue-400 transition-colors duration-300 cursor-pointer w-full text-left"}
                   >
-                    {service.name}
+                    {service.name[language.code] || service.name.en}
                   </button>
                 </li>
               ))}
@@ -111,30 +221,30 @@ export default function Footer({ theme }) {
 
           {/* Contact & CTA */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
-            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">Get In Touch</h3>
+            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">{t.getInTouch}</h3>
             <div className="space-y-4 mb-6 w-full max-w-xs md:max-w-xs">
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
                 <FaPhoneAlt className="mr-3 text-[#27bdb5]" />
-                <span className="text-sm">+919390594407</span>
+                <span className="text-sm">{t.phone}</span>
               </div>
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
                 <FaEnvelope className="mr-3 text-[#27bdb5]" />
-                <span className="text-sm">ai@tools.in</span>
+                <span className="text-sm">{t.email}</span>
               </div>
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
                 <FaMapMarkerAlt className="mr-3 text-[#27bdb5]" />
-                <span className="text-sm">India</span>
+                <span className="text-sm">{t.location}</span>
               </div>
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
                 <FaClock className="mr-3 text-[#27bdb5]" />
-                <span className="text-sm">Mon - Fri: 9am - 6pm</span>
+                <span className="text-sm">{t.hours}</span>
               </div>
             </div>
             <button 
               onClick={() => handleNavigation('/contact-us')}
               className="w-full bg-[#27bdb5] text-white font-bold py-3 px-3 rounded-lg hover:bg-[#12716c] transition-all duration-300 hover:scale-105"
             >
-              Start Your AI Journey
+              {t.startJourney}
             </button>
           </div>
         </div>
@@ -144,12 +254,12 @@ export default function Footer({ theme }) {
       <div className="border-t border-gray-700 py-6 mt-8">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className={theme === "dark" ? "text-gray-400 text-sm mb-0 md:mb-0 text-center md:text-left" : "text-black text-sm mb-0 md:mb-0 text-center md:text-left"}>
-            © {new Date().getFullYear()} AI Tools Company. All rights reserved.
+            {t.copyright}
           </p>
           <div className={theme === "dark" ? "flex gap-6 text-sm text-gray-400 justify-center md:justify-end" : "flex gap-6 text-sm text-black justify-center md:justify-end"}>
-            <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-blue-400 transition-colors">Cookie Policy</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">{t.privacy}</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">{t.terms}</a>
+            <a href="#" className="hover:text-blue-400 transition-colors">{t.cookie}</a>
           </div>
         </div>
       </div>

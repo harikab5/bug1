@@ -7,17 +7,100 @@ import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useRole } from "./context/RoleContext";
 import { useScrollToTop } from "./hooks/useScrollToTop";
+import { useLanguage } from "./context/LanguageContext";
 
 const servicesDropdown = [
-  { name: "Content & Code Generation", path: "/services/content-generation" },
-  { name: "Automation & Workflow Tools", path: "/services/automation-tools" },
-  { name: "NLP & Language Intelligence", path: "/services/nlp-intelligence" },
-  { name: "Computer Vision Solutions", path: "/services/computer-vision" },
-  { name: "AI Chatbots & Assistants", path: "/services/ai-chatbots" },
-  { name: "Data Analysis & Forecasting", path: "/services/data-analysis" },
+  {
+    name: {
+      en: "Content & Code Generation",
+      ar: "إنشاء المحتوى والبرمجة",
+      he: "יצירת תוכן וקוד"
+    },
+    path: "/services/content-generation"
+  },
+  {
+    name: {
+      en: "Automation & Workflow Tools",
+      ar: "أدوات الأتمتة وسير العمل",
+      he: "כלי אוטומציה וזרימות עבודה"
+    },
+    path: "/services/automation-tools"
+  },
+  {
+    name: {
+      en: "NLP & Language Intelligence",
+      ar: "تحليل اللغة والذكاء اللغوي",
+      he: "עיבוד שפה וידע לשוני"
+    },
+    path: "/services/nlp-intelligence"
+  },
+  {
+    name: {
+      en: "Computer Vision Solutions",
+      ar: "حلول الرؤية الحاسوبية",
+      he: "פתרונות ראייה ממוחשבת"
+    },
+    path: "/services/computer-vision"
+  },
+  {
+    name: {
+      en: "AI Chatbots & Assistants",
+      ar: "الدردشة الذكية والمساعدون",
+      he: "צ'אטבוטים ועוזרי AI"
+    },
+    path: "/services/ai-chatbots"
+  },
+  {
+    name: {
+      en: "Data Analysis & Forecasting",
+      ar: "تحليل البيانات والتنبؤ",
+      he: "ניתוח נתונים וחיזוי"
+    },
+    path: "/services/data-analysis"
+  }
 ];
 
 export default function Header({ theme, toggleTheme }) {
+  const { language, setLanguage, languages } = useLanguage();
+  const strings = {
+    en: {
+      home: 'Home',
+      home1: 'Home 1',
+      home2: 'Home 2',
+      about: 'About Us',
+      services: 'Services',
+      viewAllServices: 'View All Services',
+      blog: 'Blog',
+      contact: 'Contact Us',
+      logout: 'Logout',
+      dropdown: 'Services',
+    },
+    ar: {
+      home: 'الرئيسية',
+      home1: 'الصفحة الرئيسية 1',
+      home2: 'الصفحة الرئيسية 2',
+      about: 'معلومات عنا',
+      services: 'الخدمات',
+      viewAllServices: 'عرض جميع الخدمات',
+      blog: 'مدونة',
+      contact: 'اتصل بنا',
+      logout: 'تسجيل خروج',
+      dropdown: 'الخدمات',
+    },
+    he: {
+      home: 'בית',
+      home1: 'בית 1',
+      home2: 'בית 2',
+      about: 'אודות',
+      services: 'שירותים',
+      viewAllServices: 'הצג את כל השירותים',
+      blog: 'בלוג',
+      contact: 'צור קשר',
+      logout: 'התנתק',
+      dropdown: 'שירותים',
+    }
+  };
+  const t = strings[language.code] || strings.en;
   const [menuOpen, setMenuOpen] = React.useState(false);
   const { isAdmin, setIsAdmin } = useRole();
   const navigate = useNavigate();
@@ -54,8 +137,8 @@ export default function Header({ theme, toggleTheme }) {
       `${theme === 'dark'
         ? 'bg-[#181a19] text-white'
         : 'bg-gray-100 text-black'} w-full flex items-center justify-between px-6 md:px-12 py-4 md:py-6 shadow-2xl sticky top-0 z-50 transition-all duration-300`
-    }>
-      {/* Logo */}
+    } dir={language.dir}>
+  {/* ...existing code... */}
       <div className="flex items-center gap-6">
         <button 
           onClick={() => handleNavigation('/home1')}
@@ -65,8 +148,8 @@ export default function Header({ theme, toggleTheme }) {
         </button>
       </div>
       {/* Nav and Avatar aligned right */}
-      <div className="flex items-center gap-4 ml-auto">
-        <nav className={`hidden md:flex items-center gap-8 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+  <div className="flex items-center gap-4 ml-auto">
+  <nav className={`hidden md:flex items-center gap-8 ${theme === 'dark' ? 'text-white' : 'text-black'}`} dir={language.dir}>
           {/* Home Dropdown */}
           <div className="relative inline-block text-left">
             <div className="flex items-center gap-1">
@@ -75,7 +158,7 @@ export default function Header({ theme, toggleTheme }) {
                 className={`font-semibold text-lg focus:outline-none transition-colors duration-300
                   ${theme === 'dark' ? 'text-white hover:text-[#19e6f7]' : 'text-black hover:text-[#19e6f7]'}`}
               >
-                Home
+                {t.home}
               </button>
               <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className={`focus:outline-none transition-colors duration-300
@@ -105,7 +188,7 @@ export default function Header({ theme, toggleTheme }) {
                             ? active ? 'bg-[#19e6f7] text-black' : 'text-white'
                             : active ? 'bg-[#19e6f7] text-black' : 'text-black'}`}
                       >
-                        Home 1
+                        {t.home1}
                       </button>
                     )}
                   </Menu.Item>
@@ -118,7 +201,7 @@ export default function Header({ theme, toggleTheme }) {
                             ? active ? 'bg-[#19e6f7] text-black' : 'text-white'
                             : active ? 'bg-[#19e6f7] text-black' : 'text-black'}`}
                       >
-                        Home 2
+                        {t.home2}
                       </button>
                     )}
                   </Menu.Item>
@@ -134,7 +217,7 @@ export default function Header({ theme, toggleTheme }) {
             className={`text-lg font-semibold focus:outline-none transition-colors duration-300
               ${theme === 'dark' ? 'text-white hover:text-[#19e6f7]' : 'text-black hover:text-[#19e6f7]'}`}
           >
-            About Us
+            {t.about}
           </button>
           {/* Services Dropdown */}
           <div className="relative inline-block text-left">
@@ -144,7 +227,7 @@ export default function Header({ theme, toggleTheme }) {
                 className={`font-semibold text-lg focus:outline-none transition-colors duration-300
                   ${theme === 'dark' ? 'text-white hover:text-[#19e6f7]' : 'text-black hover:text-[#19e6f7]'}`}
               >
-                Services
+                {t.services}
               </button>
               <Menu as="div" className="relative inline-block text-left">
                 <Menu.Button className={`focus:outline-none transition-colors duration-300
@@ -174,7 +257,7 @@ export default function Header({ theme, toggleTheme }) {
                             ? active ? 'bg-[#19e6f7] text-black' : 'text-white'
                             : active ? 'bg-[#19e6f7] text-black' : 'text-black'}`}
                       >
-                        View All Services
+                        {t.viewAllServices}
                       </button>
                     )}
                   </Menu.Item>
@@ -189,7 +272,7 @@ export default function Header({ theme, toggleTheme }) {
                               ? active ? 'bg-[#19e6f7] text-black' : 'text-white'
                               : active ? 'bg-[#19e6f7] text-black' : 'text-black'}`}
                         >
-                          {service.name}
+                          {service.name[language.code] || service.name.en}
                         </button>
                       )}
                     </Menu.Item>
@@ -206,16 +289,28 @@ export default function Header({ theme, toggleTheme }) {
             className={`text-lg font-semibold focus:outline-none transition-colors duration-300
               ${theme === 'dark' ? 'text-white hover:text-[#19e6f7]' : 'text-black hover:text-[#19e6f7]'}`}
           >
-            Blog
+            {t.blog}
           </button>
-          {/* Contact Us */}
-          <button
-            onClick={() => handleNavigation('/contact-us')}
-            className={`text-lg font-semibold focus:outline-none transition-colors duration-300
-              ${theme === 'dark' ? 'text-white hover:text-[#19e6f7]' : 'text-black hover:text-[#19e6f7]'}`}
-          >
-            Contact Us
-          </button>
+          {/* Contact Us and Language Selector */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleNavigation('/contact-us')}
+              className={`text-lg font-semibold focus:outline-none transition-colors duration-300
+                ${theme === 'dark' ? 'text-white hover:text-[#19e6f7]' : 'text-black hover:text-[#19e6f7]'}`}
+            >
+              {t.contact}
+            </button>
+            <select
+              value={language.code}
+              onChange={e => setLanguage(languages[e.target.value])}
+              className="px-2 py-1 rounded border focus:outline-none bg-white text-black text-sm ml-2"
+              style={{ direction: 'ltr' }}
+            >
+              {Object.values(languages).map(lang => (
+                <option key={lang.code} value={lang.code}>{lang.label}</option>
+              ))}
+            </select>
+          </div>
         </nav>
         {/* Theme Toggle Button */}
         <button
@@ -259,7 +354,7 @@ export default function Header({ theme, toggleTheme }) {
                           active ? "bg-[#19e6f7] text-black" : "text-[#19e6f7]"
                         }`}
                       >
-                        Logout
+                        {t.logout}
                       </button>
                     )}
                   </Menu.Item>
@@ -284,7 +379,7 @@ export default function Header({ theme, toggleTheme }) {
       {menuOpen && (
         <div className="absolute top-full left-0 w-full bg-[#181a19] text-white p-6 flex flex-col space-y-4 md:hidden z-50 shadow-2xl animate-fade-in">
           <div>
-            <p className="text-[#19e6f7] font-semibold mb-2 text-lg">Home</p>
+            <p className="text-[#19e6f7] font-semibold mb-2 text-lg">{t.home}</p>
             <ul className="space-y-2">
               <li>
                 <Link 
@@ -292,7 +387,7 @@ export default function Header({ theme, toggleTheme }) {
                   className="block text-base hover:text-[#19e6f7] group focus:outline-none"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">Home 1</span>
+                  <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">{t.home1}</span>
                 </Link>
               </li>
               <li>
@@ -301,7 +396,7 @@ export default function Header({ theme, toggleTheme }) {
                   className="block text-base hover:text-[#19e6f7] group focus:outline-none"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">Home 2</span>
+                  <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">{t.home2}</span>
                 </Link>
               </li>
             </ul>
@@ -311,10 +406,10 @@ export default function Header({ theme, toggleTheme }) {
             className="text-lg hover:text-[#19e6f7] group focus:outline-none"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">About Us</span>
+            <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">{t.about}</span>
           </Link>
           <div>
-            <p className="text-[#19e6f7] font-semibold mb-2 text-lg">Services</p>
+            <p className="text-[#19e6f7] font-semibold mb-2 text-lg">{t.services}</p>
             <ul className="space-y-2">
               <li>
                 <Link
@@ -322,7 +417,7 @@ export default function Header({ theme, toggleTheme }) {
                   className="block text-base hover:text-[#19e6f7] group focus:outline-none"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">View All Services</span>
+                  <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">{t.viewAllServices}</span>
                 </Link>
               </li>
               {servicesDropdown.map((item, i) => (
@@ -332,7 +427,7 @@ export default function Header({ theme, toggleTheme }) {
                     className="block text-base hover:text-[#19e6f7] group focus:outline-none"
                     onClick={() => setMenuOpen(false)}
                   >
-                    <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">{item.name}</span>
+                    <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">{item.name[language.code] || item.name.en}</span>
                   </Link>
                 </li>
               ))}
@@ -343,14 +438,14 @@ export default function Header({ theme, toggleTheme }) {
             className="text-lg hover:text-[#19e6f7] group focus:outline-none"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">Blog</span>
+            <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">{t.blog}</span>
           </Link>
           <Link 
             to="/contact-us" 
             className="text-lg hover:text-[#19e6f7] group focus:outline-none"
             onClick={() => setMenuOpen(false)}
           >
-            <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">Contact Us</span>
+            <span className="group-hover:scale-105 group-hover:text-[#19e6f7] transition-transform duration-300">{t.contact}</span>
           </Link>
         </div>
       )}

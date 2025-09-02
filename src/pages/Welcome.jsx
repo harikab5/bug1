@@ -6,6 +6,47 @@ import welcomeBg from "../assets/welcome.jpeg";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
 export default function Welcome() {
+  // Language state
+  const [language, setLanguage] = useState("en");
+  // RTL support
+  const isRTL = language === "ar" || language === "he";
+
+  // Simple translations
+  const translations = {
+    en: {
+      welcome: "Welcome to AI Tools",
+      login: "Login to your account",
+      email: "Email",
+      password: "Password",
+      loginBtn: "Login",
+      signupPrompt: "Don't have an account?",
+      signupBtn: "Sign up",
+      user: "User",
+      admin: "Admin"
+    },
+    ar: {
+      welcome: "مرحبا بكم في أدوات الذكاء الاصطناعي",
+      login: "تسجيل الدخول إلى حسابك",
+      email: "البريد الإلكتروني",
+      password: "كلمة المرور",
+      loginBtn: "تسجيل الدخول",
+      signupPrompt: "ليس لديك حساب؟",
+      signupBtn: "سجل الآن",
+      user: "مستخدم",
+      admin: "مسؤول"
+    },
+    he: {
+      welcome: "ברוכים הבאים לכלי הבינה המלאכותית",
+      login: "התחבר לחשבון שלך",
+      email: "אימייל",
+      password: "סיסמה",
+      loginBtn: "התחבר",
+      signupPrompt: "אין לך חשבון?",
+      signupBtn: "הירשם",
+      user: "משתמש",
+      admin: "מנהל"
+    }
+  };
   const [isAdmin, setIsAdmin] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,10 +104,22 @@ export default function Welcome() {
   };
 
   return (
-    <div className="min-h-screen flex flex-row">
+    <div className="min-h-screen flex flex-row" dir={isRTL ? (language === 'ar' ? 'rtl' : 'rtl') : 'ltr'} lang={language}>
       {/* Left: Form */}
       <div className={`w-full md:w-1/2 flex flex-col justify-center items-center min-h-screen ${theme === 'dark' ? 'bg-[#181a19]' : 'bg-white'}`}>
         <div className={`w-full max-w-md p-8 ${theme === 'dark' ? 'bg-[#1a1a1a] border-[#19e6f7]/20' : 'bg-gray-50 border-gray-200'} border rounded-lg`}>
+          {/* Language Dropdown */}
+          <div className="flex justify-end mb-4">
+            <select
+              value={language}
+              onChange={e => setLanguage(e.target.value)}
+              className={`px-3 py-2 rounded-lg border focus:outline-none ${theme === 'dark' ? 'bg-[#232323] text-white border-[#19e6f7]/30' : 'bg-white text-black border-gray-300'}`}
+            >
+              <option value="en">English</option>
+              <option value="ar">العربية</option>
+              <option value="he">עברית</option>
+            </select>
+          </div>
           {/* Logo */}
           <div className="relative flex justify-center items-center mb-8">
             <div className={`${theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-white'} p-4 rounded-full`}>
@@ -87,8 +140,8 @@ export default function Welcome() {
 
           {/* Welcome Text */}
           <div className="text-center mb-8">
-            <h2 className={`${theme === 'dark' ? 'text-white' : 'text-black'} text-2xl font-bold mb-4`}>Welcome to AI Tools</h2>
-            <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>Login to your account</p>
+            <h2 className={`${theme === 'dark' ? 'text-white' : 'text-black'} text-2xl font-bold mb-4`}>{translations[language].welcome}</h2>
+            <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>{translations[language].login}</p>
           </div>
 
           {/* Role Selection */}
@@ -107,7 +160,7 @@ export default function Welcome() {
                     : 'transparent'
                 }}
               >
-                User
+                {translations[language].user}
               </button>
               <button
                 onClick={() => handleRoleSelect(true)}
@@ -122,7 +175,7 @@ export default function Welcome() {
                     : 'transparent'
                 }}
               >
-                Admin
+                {translations[language].admin}
               </button>
             </div>
           </div>
@@ -131,27 +184,27 @@ export default function Welcome() {
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-[#19e6f7]' : 'text-gray-700'}`}>
-                Email
+                {translations[language].email}
               </label>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${theme === 'dark' ? 'bg-[#1a1a1a] border-[#19e6f7]/30 text-white placeholder-gray-400 focus:border-[#19e6f7]' : 'bg-white border-gray-300 text-black placeholder-gray-500 focus:border-blue-500'}`}
-                placeholder="Enter your email"
+                placeholder={translations[language].email}
                 required
               />
             </div>
             <div>
               <label className={`block text-sm font-medium mb-2 ${theme === 'dark' ? 'text-[#19e6f7]' : 'text-gray-700'}`}>
-                Password
+                {translations[language].password}
               </label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className={`w-full px-4 py-3 border rounded-lg focus:outline-none transition-colors ${theme === 'dark' ? 'bg-[#1a1a1a] border-[#19e6f7]/30 text-white placeholder-gray-400 focus:border-[#19e6f7]' : 'bg-white border-gray-300 text-black placeholder-gray-500 focus:border-blue-500'}`}
-                placeholder="Enter your password"
+                placeholder={translations[language].password}
                 required
               />
             </div>
@@ -165,19 +218,19 @@ export default function Welcome() {
               className="w-full py-3 px-4 text-white font-medium rounded-lg transition-all duration-300 hover:opacity-90"
               style={{background: 'linear-gradient(90deg, #000000 0%, #1a1a1a 20%, #00d4aa 40%, #00a080 60%, #2a2a2a 80%, #000000 100%)'}}
             >
-              Login
+              {translations[language].loginBtn}
             </button>
           </form>
 
           {/* Sign Up Link */}
           <div className="text-center mt-6">
             <p className={`${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
-              Don't have an account?{" "}
+              {translations[language].signupPrompt}{" "}
               <button
                 onClick={handleContinue}
                 className={`hover:underline ${theme === 'dark' ? 'text-[#19e6f7]' : 'text-blue-600'}`}
               >
-                Sign up
+                {translations[language].signupBtn}
               </button>
             </p>
           </div>

@@ -1,3 +1,87 @@
+// Chart options helper
+const commonOptions = (title) => ({
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { labels: { color: "#19e6f7" } },
+    title: { display: true, text: title, color: "#19e6f7", font: { size: 14 } },
+  },
+  scales: {
+    x: { ticks: { color: "#19e6f7" }, grid: { color: "#374151" } },
+    y: { ticks: { color: "#19e6f7" }, grid: { color: "#374151" } },
+  },
+});
+
+// Chart data
+const lineData = {
+  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  datasets: [
+    {
+      label: "Revenue",
+      data: [12000, 19000, 15000, 25000, 22000, 30000],
+      borderColor: "#19e6f7",
+      backgroundColor: "rgba(25, 230, 247, 0.2)",
+      tension: 0.3,
+    },
+  ],
+};
+
+// barLabels and barData must use language from context, so move them inside AdminDashboard
+
+const doughnutData = {
+  labels: ["Direct", "Organic", "Referral", "Social"],
+  datasets: [
+    {
+      data: [35, 30, 20, 15],
+      backgroundColor: ["#19e6f7", "#27bdb5", "#374151", "#6b7280"],
+      borderWidth: 0,
+    },
+  ],
+};
+
+const doughnutOptions = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: {
+    legend: { position: "bottom", labels: { color: "#19e6f7" } },
+    title: {
+      display: true,
+      text: "Traffic Sources",
+      color: "#19e6f7",
+      font: { size: 14 },
+    },
+  },
+};
+
+const miniDoughnut = {
+  labels: ["Direct", "Organic", "Referral"],
+  datasets: [
+    {
+      data: [45, 35, 20],
+      backgroundColor: ["#19e6f7", "#27bdb5", "#374151"],
+      borderWidth: 0,
+    },
+  ],
+};
+
+const miniBar = {
+  labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  datasets: [
+    {
+      label: "Sign-ups",
+      data: [12, 19, 8, 15, 22, 18, 25],
+      backgroundColor: "#19e6f7",
+      borderRadius: 4,
+    },
+  ],
+};
+
+const miniOpts = {
+  responsive: true,
+  maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+  scales: { x: { display: false }, y: { display: false } },
+};
 /* src/pages/AdminDashboard.jsx */
 import React, { useState } from "react";
 import { motion } from "framer-motion";
@@ -34,6 +118,10 @@ import {
 } from "chart.js";
 import { Line, Bar, Doughnut } from "react-chartjs-2";
 import { useTheme } from "../context/ThemeContext";
+import { useLanguage } from "../context/LanguageContext";
+import StatCard from "../components/StatCard";
+import ServiceCard from "../components/ServiceCard";
+import ActivityLog from "../components/ActivityLog";
 
 ChartJS.register(
   CategoryScale,
@@ -99,349 +187,322 @@ const serviceCards = [
 
 /* ------------- main ------------- */
 const AdminDashboard = () => {
+  // Move barLabels and barData here so they are defined before usage
   const { theme, toggleTheme } = useTheme();
+  const { language } = useLanguage();
 
-  return (
-    <div
-      className={
-        `min-h-screen ${theme === 'dark' ? 'bg-[#181a19] text-white' : 'bg-white text-black'}`
-      }
-    >
-      {/* SCROLLABLE CONTENT */}
-      <main className="p-6 md:p-8 space-y-10 pt-24">
-        {/* HEADER */}
-        <header className="flex items-center justify-between">
-          <h1 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Admin Dashboard</h1>
-          {/* Removed the last login button */}
-        </header>
+  // barLabels and barData must be defined after language
+  const barLabels = [
+    {
+      en: "Data",
+      ar: "بيانات",
+      he: "נתונים"
+    },
+    {
+      en: "Content",
+      ar: "محتوى",
+      he: "תוכן"
+    },
+    {
+      en: "Enhanced",
+      ar: "محسن",
+      he: "משופר"
+    },
+    {
+      en: "Personalized",
+      ar: "مخصص",
+      he: "מותאם אישית"
+    },
+    {
+      en: "Industry",
+      ar: "صناعة",
+      he: "תעשייה"
+    }
+  ];
 
-        {/* QUICK STATS */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl p-1"
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <StatCard label="Total Users" value={quickStats.totalUsers} theme={theme} />
-            <StatCard label="Revenue (USD)" value={`$${quickStats.revenue.toLocaleString()}`} theme={theme} />
-            <StatCard label="Active Services" value={quickStats.activeServices} theme={theme} />
-            <StatCard label="Support Tickets" value={quickStats.tickets} theme={theme} />
-          </div>
-        </motion.section>
-
-        {/* SERVICES GRID */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4 text-[#19e6f7]">Services</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {serviceCards.map((s) => (
-              <ServiceCard key={s.id} {...s} theme={theme} />
-            ))}
-          </div>
-        </section>
-
-        {/* ORDERS TABLE */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4 text-[#19e6f7]">
-            Recent Orders
-          </h2>
-          <div className="overflow-x-auto">
-            <table className={`min-w-full rounded-xl ${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'}`}>
-              <thead>
-                <tr className={`text-left border-b ${theme === 'dark' ? 'border-white/10' : 'border-white/10'}`}>
-                  <th className="p-4 text-white">Order ID</th>
-                  <th className="p-4 text-white">User</th>
-                  <th className="p-4 text-white">Service</th>
-                  <th className="p-4 text-white">Date</th>
-                  <th className="p-4 text-white">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentOrders.map((o) => (
-                  <tr
-                    key={o.id}
-                    className="border-b border-white/5 hover:bg-white/5"
-                  >
-                    <td className={`p-4 ${theme === 'dark' ? 'text-white' : 'text-white'}`}>{o.id}</td>
-                    <td className={`p-4 ${theme === 'dark' ? 'text-white' : 'text-white'}`}>{o.user}</td>
-                    <td className={`p-4 ${theme === 'dark' ? 'text-white' : 'text-white'}`}>{o.service}</td>
-                    <td className={`p-4 ${theme === 'dark' ? 'text-white' : 'text-white'}`}>{o.date}</td>
-                    <td className="p-4">
-                      <StatusBadge status={o.status} />
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* ANALYTICS CHARTS */}
-        <section>
-          <h2 className="text-2xl font-bold mb-4 text-[#19e6f7]">Analytics</h2>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Revenue Trend (Line) */}
-            <motion.div
-              whileHover={{ scale: 1.01 }}
-              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}
-            >
-              <Line
-                data={lineData}
-                options={commonOptions("Revenue Trend (USD)")}
-              />
-            </motion.div>
-
-            {/* Service Usage (Bar) */}
-            <motion.div
-              whileHover={{ scale: 1.01 }}
-              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}
-            >
-              <Bar data={barData} options={commonOptions("Service Usage")} />
-            </motion.div>
-
-            {/* Traffic Sources (Doughnut) */}
-            <motion.div
-              whileHover={{ scale: 1.01 }}
-              className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}
-            >
-              <Doughnut data={doughnutData} options={doughnutOptions} />
-            </motion.div>
-          </div>
-        </section>
-
-        {/* ACTIVITY LOG & QUICK ACTIONS */}
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          {/* Left: full-span on mobile, 2 cols on lg */}
-          <div className="lg:col-span-2">
-            <ActivityLog theme={theme} />
-          </div>
-
-          {/* Right: Chart Gallery */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
-            {/* Mini Doughnut */}
-            <div className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}>
-              <h4 className="text-sm text-[#19e6f7] mb-2">Traffic Sources</h4>
-              <div className="h-23">
-                <Doughnut data={miniDoughnut} options={miniOpts} />
-              </div>
-            </div>
-
-            {/* Mini Bar */}
-            <div className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-4 border border-[#19e6f7]/20`}>
-              <h4 className="text-sm text-[#19e6f7] mb-2">Weekly Sign-ups</h4>
-              <div className="h-23">
-                <Bar data={miniBar} options={miniOpts} />
-              </div>
-            </div>
-          </motion.div>
-        </section>
-      </main>
-    </div>
-  );
-};
-
-/* ------------- sub-components ------------- */
-const StatCard = ({ label, value, theme }) => (
-  <motion.div
-    whileHover={{ scale: 1.03 }}
-    className={`rounded-2xl p-6 border border-[#19e6f7]/20 shadow ${theme === 'dark' ? 'bg-[#1a1a1a]' : 'bg-black'}`}
-  >
-    <p className="text-sm text-[#19e6f7]">{label}</p>
-    <p className={`text-2xl font-bold text-white`}>{value}</p>
-  </motion.div>
-);
-
-const ServiceCard = ({ title, icon, theme }) => (
-  <motion.div
-    whileHover={{ y: -6 }}
-    className={`rounded-2xl p-6 border border-[#19e6f7]/20 hover:border-[#19e6f7]/50 transition cursor-pointer ${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'}`}
-  >
-    <div className="text-[#19e6f7] mb-3">{icon}</div>
-    <h3 className={`font-semibold text-white`}>{title}</h3>
-  </motion.div>
-);
-
-const StatusBadge = ({ status }) => {
-  const colors = {
-    completed: "bg-green-500/20 text-green-400",
-    "in-progress": "bg-yellow-500/20 text-yellow-400",
-    pending: "bg-red-500/20 text-red-400",
-  };
-  return (
-    <span className={`px-3 py-1 rounded-full text-xs ${colors[status]}`}>
-      {status}
-    </span>
-  );
-};
-
-/* --------------  NEW FULL-WIDTH ACTIVITY LOG  -------------- */
-const ActivityLog = ({ theme }) => {
-  /* tiny random spark-line data */
-  const sparkData = {
-    labels: [...Array(8)].map((_, i) => `${i}h`),
+  const barData = {
+    labels: barLabels.map(label => label[language.code]),
     datasets: [
       {
-        label: "Events",
-        data: [3, 5, 2, 6, 4, 7, 5, 8],
-        borderColor: "#19e6f7",
-        backgroundColor: "rgba(25, 230, 247, 0.15)",
-        fill: true,
-        tension: 0.4,
-        pointRadius: 0,
+        label: {
+          en: "Requests",
+          ar: "الطلبات",
+          he: "בקשות"
+        }[language.code],
+        data: [432, 321, 287, 198, 176],
+        backgroundColor: "#19e6f7",
       },
     ],
   };
 
-  const sparkOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: { legend: { display: false } },
-    scales: {
-      x: { display: false },
-      y: { display: false },
+  // Translations for dashboard
+  const translations = {
+    en: {
+      dashboard: "Admin Dashboard",
+    Personalized: "مخصص",
+    Direct: "مباشر",
+    Organic: "عضوي",
+    Referral: "إحالة",
+    Personalized: "מותאם אישית",
+    Social: "اجتماعي",
+    Automation: "الأتمتة",
+    Data: "البيانات",
+    Content: "المحتوى",
+    Enhanced: "محسن",
+    Personalized: "مخصص",
+    Industry: "الصناعة",
+    Requests: "الطلبات",
+      totalUsers: "Total Users",
+      revenue: "Revenue (USD)",
+      activeServices: "Active Services",
+    Direct: "ישיר",
+    Organic: "אורגני",
+    Referral: "הפניה",
+    Social: "חברתי",
+    Automation: "אוטומציה",
+    Data: "נתונים",
+    Content: "תוכן",
+    Enhanced: "משופר",
+    Personalized: "מותאם אישית",
+    Industry: "תעשייה",
+    Requests: "בקשות",
+      tickets: "Support Tickets",
+      services: "Services",
+      recentOrders: "Recent Orders",
+      orderId: "Order ID",
+      user: "User",
+      service: "Service",
+      date: "Date",
+      status: "Status",
+      analytics: "Analytics",
+      activityLog: "Activity Log",
+      trafficSources: "Traffic Sources",
+      weeklySignups: "Weekly Sign-ups",
+      "Content Generation": "Content Generation",
+      "Data Analysis": "Data Analysis",
+      Automation: "Automation",
+      Alice: "Alice",
+      Bob: "Bob",
+      Carol: "Carol"
     },
+    ar: {
+      dashboard: "لوحة الإدارة",
+      totalUsers: "إجمالي المستخدمين",
+      revenue: "الإيرادات (دولار)",
+      activeServices: "الخدمات النشطة",
+      tickets: "تذاكر الدعم",
+      services: "الخدمات",
+      recentOrders: "الطلبات الأخيرة",
+      orderId: "معرف الطلب",
+      user: "المستخدم",
+      service: "الخدمة",
+      date: "التاريخ",
+      status: "الحالة",
+      analytics: "تحليلات",
+      activityLog: "سجل النشاط",
+      trafficSources: "مصادر الحركة",
+      weeklySignups: "التسجيلات الأسبوعية",
+    Alice: "أليس",
+    Bob: "بوب",
+    Carol: "كارول",
+    completed: "مكتمل",
+    "in-progress": "جاري التنفيذ",
+    pending: "قيد الانتظار",
+    "17 Jul 2025": "١٧ يوليو ٢٠٢٥",
+    "16 Jul 2025": "١٦ يوليو ٢٠٢٥",
+  // Service card translations
+  "Content Generation (Gen-AI)": "إنشاء المحتوى (الذكاء الاصطناعي)",
+  "Content Generation": "إنشاء المحتوى",
+  "Data Analysis & Insights": "تحليل البيانات والرؤى",
+  "Data Analysis": "تحليل البيانات",
+  "Automation & Efficiency": "الأتمتة والكفاءة",
+  Automation: "الأتمتة",
+  "Industry Specific Apps": "تطبيقات خاصة بالصناعة",
+  "Personalized Experiences": "تجارب مخصصة",
+  "Enhanced HCI": "تحسين التفاعل البشري الحاسوبي"
+    },
+    he: {
+      dashboard: "לוח מנהל",
+      totalUsers: "משתמשים סה'כ",
+      revenue: "הכנסה (דולר)",
+      activeServices: "שירותים פעילים",
+      tickets: "קריאות תמיכה",
+      services: "שירותים",
+      recentOrders: "הזמנות אחרונות",
+      orderId: "מספר הזמנה",
+      user: "משתמש",
+      service: "שירות",
+      date: "תאריך",
+      status: "סטטוס",
+      analytics: "אנליטיקות",
+      activityLog: "יומן פעילות",
+      trafficSources: "מקורות תנועה",
+      weeklySignups: "הרשמות שבועיות",
+    Alice: "אליס",
+    Bob: "בוב",
+    Carol: "קרול",
+    completed: "הושלם",
+    "in-progress": "בתהליך",
+    pending: "ממתין",
+    "17 Jul 2025": "17 יולי 2025",
+    "16 Jul 2025": "16 יולי 2025",
+  // Service card translations
+  "Content Generation (Gen-AI)": "יצירת תוכן (בינה מלאכותית)",
+  "Content Generation": "יצירת תוכן",
+  "Data Analysis & Insights": "ניתוח נתונים ותובנות",
+  "Data Analysis": "ניתוח נתונים",
+  "Automation & Efficiency": "אוטומציה ויעילות",
+  Automation: "אוטומציה",
+  "Industry Specific Apps": "אפליקציות ייעודיות לתעשייה",
+  "Personalized Experiences": "חוויות מותאמות אישית",
+  "Enhanced HCI": "שיפור ממשק אדם-מחשב"
+    }
   };
-
-  const logs = [
-    { text: "New user \"David\" signed up", time: "12:34 PM" },
-    { text: "Monthly report generated", time: "11:05 AM" },
-    { text: "Gen-AI service updated to v2.3", time: "09:21 AM" },
-    { text: "Ticket #T101 resolved", time: "08:57 AM" },
-    { text: "Model deployment finished", time: "08:12 AM" },
-    { text: "Order #A103 placed by \"Eva\"", time: "07:45 AM" },
-  ];
+  const t = translations[language.code];
 
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      className={`${theme === 'dark' ? 'bg-[#1a1a1a]/50' : 'bg-black'} backdrop-blur rounded-2xl p-6 border border-[#19e6f7]/20`}
+    <div
+      className={`min-h-screen ${theme === 'dark' ? 'bg-[#181a19] text-white' : 'bg-white text-black'}`}
+      dir={language.dir}
+      lang={language.code}
     >
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-        <h3 className="text-lg font-bold text-[#19e6f7]">Activity Log</h3>
-        <div className="h-16 w-32 mt-4 md:mt-0">
-          <Line data={sparkData} options={sparkOptions} />
-        </div>
-      </div>
-
-      {/* timeline */}
-      <div className="relative space-y-4">
-        {logs.map((l, idx) => (
-          <motion.div
-            key={idx}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="flex items-start gap-4"
-          >
-            <div className="flex-1">
-              <p className="text-sm text-white">{l.text}</p>
-              <p className="text-xs text-gray-400">{l.time}</p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </motion.section>
+      <main className="p-6 md:p-8 space-y-10 pt-24">
+        <header className="flex items-center justify-between">
+          <h1 className={`text-3xl font-bold ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.dashboard}</h1>
+        </header>
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <StatCard label={t.totalUsers} value={quickStats.totalUsers} icon={<FiUsers />} />
+          <StatCard label={t.revenue} value={quickStats.revenue} icon={<FiBarChart2 />} />
+          <StatCard label={t.activeServices} value={quickStats.activeServices} icon={<FiActivity />} />
+          <StatCard label={t.tickets} value={quickStats.tickets} icon={<FiShoppingBag />} />
+        </section>
+        <section>
+          <h2 className="text-xl font-semibold mb-4">{t.services}</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {serviceCards.map((card) => (
+              <ServiceCard key={card.id} title={t[card.title] || card.title} icon={card.icon} />
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2 className="text-xl font-semibold mb-4">{t.recentOrders}</h2>
+          <table className="w-full text-left">
+            <thead>
+              <tr className="text-[#19e6f7]">
+                <th>{t.orderId}</th>
+                <th>{t.user}</th>
+                <th>{t.service}</th>
+                <th>{t.date}</th>
+                <th>{t.status}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {recentOrders.map((order) => (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{t[order.user] || order.user}</td>
+                  <td>{t[order.service] || order.service}</td>
+                  <td>{t[order.date] || order.date}</td>
+                  <td>{t[order.status] || order.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-[#181a19]/60 rounded-xl p-6 h-80">
+            <h3 className="text-lg font-bold text-[#19e6f7] mb-2">{t.analytics}</h3>
+            <Bar data={{
+              ...barData,
+              labels: barData.labels.map(label => t[label] || label),
+              datasets: barData.datasets.map(ds => ({
+                ...ds,
+                label: t[ds.label] || ds.label
+              }))
+            }} options={{
+              ...commonOptions(t.analytics),
+              plugins: {
+                ...commonOptions(t.analytics).plugins,
+                title: {
+                  ...commonOptions(t.analytics).plugins.title,
+                  text: t.analytics
+                },
+                legend: {
+                  ...commonOptions(t.analytics).plugins.legend,
+                  labels: {
+                    ...commonOptions(t.analytics).plugins.legend.labels,
+                    generateLabels: chart => {
+                      const data = chart.data;
+                      return data.datasets.map((ds, i) => ({
+                        text: t[ds.label] || ds.label,
+                        fillStyle: ds.backgroundColor,
+                        strokeStyle: ds.backgroundColor,
+                        lineWidth: 1,
+                        hidden: false,
+                        index: i
+                      }));
+                    }
+                  }
+                }
+              },
+              scales: {
+                x: {
+                  ...commonOptions(t.analytics).scales.x,
+                  ticks: {
+                    ...commonOptions(t.analytics).scales.x.ticks,
+                    callback: function(value, index) {
+                      const label = barData.labels[index];
+                      // Always use English for x-axis if language is English
+                      if (language.code === 'en') return label;
+                      return t[label] || label;
+                    }
+                  }
+                },
+                y: commonOptions(t.analytics).scales.y
+              }
+            }} />
+          </div>
+          <div className="bg-[#181a19]/60 rounded-xl p-6 h-80">
+            <h3 className="text-lg font-bold text-[#19e6f7] mb-2">{t.trafficSources}</h3>
+            <Doughnut data={{
+              ...doughnutData,
+              labels: doughnutData.labels.map(label => t[label] || label)
+            }} options={{
+              ...doughnutOptions,
+              plugins: {
+                ...doughnutOptions.plugins,
+                title: {
+                  ...doughnutOptions.plugins.title,
+                  text: t.trafficSources
+                },
+                legend: {
+                  ...doughnutOptions.plugins.legend,
+                  labels: {
+                    ...doughnutOptions.plugins.legend.labels,
+                    generateLabels: chart => {
+                      const data = chart.data;
+                      return data.labels.map((label, i) => ({
+                        text: language.code === 'en' ? label : t[label] || label,
+                        fillStyle: data.datasets[0].backgroundColor[i],
+                        strokeStyle: data.datasets[0].backgroundColor[i],
+                        lineWidth: 1,
+                        hidden: false,
+                        index: i
+                      }));
+                    }
+                  }
+                }
+              }
+            }} />
+          </div>
+        </section>
+        {/* ACTIVITY LOG */}
+        <section>
+          <ActivityLog theme={theme} title={t.activityLog} />
+        </section>
+      </main>
+    </div>
   );
-};
+}
 
 export default AdminDashboard;
-
-/* 3️⃣  dummy data & helper */
-const commonOptions = (title) => ({
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: { labels: { color: "#19e6f7" } },
-    title: { display: true, text: title, color: "#19e6f7", font: { size: 14 } },
-  },
-  scales: {
-    x: { ticks: { color: "#19e6f7" }, grid: { color: "#374151" } },
-    y: { ticks: { color: "#19e6f7" }, grid: { color: "#374151" } },
-  },
-});
-
-const lineData = {
-  labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
-  datasets: [
-    {
-      label: "Revenue",
-      data: [12000, 19000, 15000, 25000, 22000, 30000],
-      borderColor: "#19e6f7",
-      backgroundColor: "rgba(25, 230, 247, 0.2)",
-      tension: 0.3,
-    },
-  ],
-};
-
-const barData = {
-  labels: serviceCards.map((s) => s.title.split(" ")[0]),
-  datasets: [
-    {
-      label: "Requests",
-      data: [432, 321, 287, 198, 176, 254],
-      backgroundColor: "#19e6f7",
-    },
-  ],
-};
-
-const doughnutData = {
-  labels: ["Direct", "Organic", "Referral", "Social"],
-  datasets: [
-    {
-      data: [35, 30, 20, 15],
-      backgroundColor: ["#19e6f7", "#27bdb5", "#374151", "#6b7280"],
-      borderWidth: 0,
-    },
-  ],
-};
-
-const doughnutOptions = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: {
-    legend: { position: "bottom", labels: { color: "#19e6f7" } },
-    title: {
-      display: true,
-      text: "Traffic Sources",
-      color: "#19e6f7",
-      font: { size: 14 },
-    },
-  },
-};
-
-/* mini-chart data */
-const miniDoughnut = {
-  labels: ["Direct", "Organic", "Referral"],
-  datasets: [
-    {
-      data: [45, 35, 20],
-      backgroundColor: ["#19e6f7", "#27bdb5", "#374151"],
-      borderWidth: 0,
-    },
-  ],
-};
-
-const miniBar = {
-  labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-  datasets: [
-    {
-      label: "Sign-ups",
-      data: [12, 19, 8, 15, 22, 18, 25],
-      backgroundColor: "#19e6f7",
-      borderRadius: 4,
-    },
-  ],
-};
-
-const miniOpts = {
-  responsive: true,
-  maintainAspectRatio: false,
-  plugins: { legend: { display: false } },
-  scales: { x: { display: false }, y: { display: false } },
-};
