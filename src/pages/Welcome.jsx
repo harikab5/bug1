@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRole } from "../context/RoleContext";
-import logo from "../assets/logo1.png";
-import welcomeBg from "../assets/welcome.jpeg";
+import logo from "../assets/logo.jpg";
+import welcomeBg from "../assets/welcome.jpg";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
 export default function Welcome() {

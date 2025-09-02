@@ -10,7 +10,7 @@ import {
   FaClock,
   FaArrowRight,
 } from "react-icons/fa";
-import logo from "./assets/logo1.png";
+import logo from "./assets/logo.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { useScrollToTop } from "./hooks/useScrollToTop";
 import { useLanguage } from "./context/LanguageContext";

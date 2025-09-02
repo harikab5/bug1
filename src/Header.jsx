@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { FaChevronDown } from "react-icons/fa";
-import logo from "./assets/logo1.png";
+import logo from "./assets/logo.jpg";
 import { Menu, Transition } from "@headlessui/react";
 import { Link, useNavigate } from "react-router-dom";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
