@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../assets/logo1.png";
-import welcomeBg from "../assets/welcome.jpeg";
+import welcomeBg from "../assets/welcome.jpg";
 import { useTheme } from "../context/ThemeContext";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 
