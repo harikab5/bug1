@@ -35,6 +35,7 @@ const HeroSection = ({ language }) => {
           loop
           muted
           playsInline
+          loading="lazy"
           className="w-full h-full object-cover"
         />
       </div>
@@ -45,13 +46,13 @@ const HeroSection = ({ language }) => {
           transition={{ duration: 0.8 }}
           className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#fff] mb-4"
         >
-          <span className="text-[#19e6f7]">AI</span> {t.title[language.code]}
+            {t.title[language.code]}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-lg md:text-xl lg:text-2xl text-[#bfc1be] max-w-4xl mx-auto mb-8"
+          className="text-lg md:text-xl lg:text-2xl text-[#fff] max-w-4xl mx-auto mb-8"
         >
           {t.subtitle[language.code]}
         </motion.p>

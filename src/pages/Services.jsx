@@ -236,26 +236,27 @@ export default function Services() {
   }, [language]);
 
   return (
-    <div className={`min-h-screen relative overflow-hidden ${theme === 'dark' ? 'bg-[#121212] text-white' : 'bg-gray-50 text-black'}`}
+    <div className={`min-h-screen relative ${theme === 'dark' ? 'bg-[#121212] text-white' : 'bg-gray-50 text-black'}`}
       dir={language.dir}>
       {/* Hero Section with Parallax Effect */}
-      <section className="relative py-32 px-4 z-10 overflow-hidden min-h-[545px] flex flex-col items-center justify-center text-center">
+  <section className="relative py-32 px-4 z-10 min-h-[545px] flex flex-col items-center justify-center text-center">
       {/* Background Video */}
         <div className="absolute inset-0 z-0">
       <video
         autoPlay
-            muted 
+        muted
         loop
-            className="w-full h-full object-cover"
-            style={{ filter: theme === 'dark' ? 'brightness(0.5)' : 'brightness(0.7)' }}
+        loading="lazy"
+        className="w-full h-full object-cover"
+        style={{ filter: theme === 'dark' ? 'brightness(0.5)' : 'brightness(0.7)' }}
       >
-            <source src={serviceHeroVideo} type="video/mp4" />
-            Your browser does not support the video tag.
+        <source src={serviceHeroVideo} type="video/mp4" />
+        Your browser does not support the video tag.
       </video>
         </div>
         <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center justify-center text-center">
           <div className="mb-4">
-            <span className="text-[#27bdb5] bg-[#27bdb514] rounded-full px-4 py-1 text-base font-medium tracking-wide">
+            <span className="text-[#fff] bg-transparent rounded-full px-4 py-1 text-base font-medium tracking-wide">
               {t.discoverAi[language.code]}
             </span>
           </div>
@@ -311,12 +312,12 @@ export default function Services() {
               <div className="md:w-1/2 w-full flex flex-col justify-center">
                 <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">{service.title[language.code]}</h2>
                 <p className="text-white text-lg mb-6 text-justify leading-relaxed">{service.description[language.code]}</p>
-                <button 
-                  onClick={() => handleNavigation(service.path)}
+                <a
+                  href ={service.path}
                   className="bg-black hover:bg-[#111211] text-white font-bold rounded-full px-8 py-3 text-base shadow transition-colors border-none outline-none w-max"
                 >
                   {t.learnMore[language.code]}
-                </button>
+                </a>
               </div>
             </div>
           ))}
@@ -327,13 +328,7 @@ export default function Services() {
       <section className={`w-full py-24 px-4 ${theme === 'dark' ? 'bg-[#111211]' : 'bg-gray-100'}`}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <div className="text-[#27bdb5] text-sm font-semibold mb-2 tracking-wider">{
-              {
-                en: "HOW IT WORKS",
-                ar: "كيف يعمل",
-                he: "איך זה עובד"
-              }[language.code]
-            }</div>
+             
             <h2 className={`text-4xl md:text-5xl font-extrabold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{
               {
                 en: "Get Started with 4 Easy Steps",
@@ -753,7 +748,12 @@ export default function Services() {
       </section>
 
       {/* Get Started with AI Today Section */}
-      <section className={`w-full py-24 px-4 ${theme === 'dark' ? 'bg-[#111211]' : 'bg-gray-100'}`}>
+      <section
+        className={`w-full py-24 px-4`}
+        style={{
+          background: 'linear-gradient(90deg, rgba(0,79,81,0.45) 0%, rgba(0,95,96,0.45) 20%, rgba(0,121,123,0.45) 40%, rgba(0,152,156,0.45) 60%, rgba(86,191,195,0.45) 80%, rgba(178,223,223,0.45) 100%)',
+          backgroundColor: 'transparent',
+        }}>
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col lg:flex-row items-stretch gap-12">
             {/* Left: Text Content */}
@@ -767,7 +767,7 @@ export default function Services() {
                   }[language.code]
                 }<br />
               </h2>
-              <p className={`text-lg mb-6 leading-relaxed ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>
+              <p className={`text-lg mb-6 leading-relaxed ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-[#fff]'}`}>
                 <div className="text-justify">{
                   {
                     en: "Ready to implement AI solutions? Our expert team will guide you through a simple 3-step process to get your AI tools up and running. From chatbots to data analysis, we'll help you choose and deploy the right solutions for your needs.",
@@ -776,7 +776,7 @@ export default function Services() {
                   }[language.code]
                 }</div>
               </p>
-              <p className={`text-base mb-6 leading-relaxed ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>
+              <p className={`text-base mb-6 leading-relaxed ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-[#fff]'}`}>
                 <div className="text-justify">{
                   {
                     en: "Our comprehensive AI implementation process includes thorough assessment of your current systems, customized solution design, seamless integration with existing workflows, and ongoing support to ensure optimal performance. Providing tailored recommendations that align with your business goals.",
@@ -785,7 +785,7 @@ export default function Services() {
                   }[language.code]
                 }</div>
               </p>
-              <p className={`text-base mb-8 leading-relaxed ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-gray-600'}`}>
+              <p className={`text-base mb-8 leading-relaxed ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-[#fff]'}`}>
                 <div className="text-justify">
                  </div>
               </p>
@@ -807,7 +807,7 @@ export default function Services() {
                 </button>
                 <button 
                   onClick={() => handleNavigation('/contact-us')}
-                  className="bg-transparent border border-[#27bdb5] text-[#27bdb5] hover:bg-[#27bdb5] hover:text-white font-bold rounded-lg px-8 py-3 text-base shadow transition-colors w-full sm:w-auto"
+                  className="bg-transparent border border-[#27bdb5] text-[#fff] hover:bg-[#27bdb5] hover:text-white font-bold rounded-lg px-8 py-3 text-base shadow transition-colors w-full sm:w-auto"
                 >
                   {({
                     en: "Contact Our Experts",

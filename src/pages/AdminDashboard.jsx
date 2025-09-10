@@ -372,11 +372,11 @@ const AdminDashboard = () => {
             ))}
           </div>
         </section>
-        <section>
+        <section className="bg-black rounded-xl p-6 mb-8 text-[#19e6f7]">
           <h2 className="text-xl font-semibold mb-4">{t.recentOrders}</h2>
           <table className="w-full text-left">
             <thead>
-              <tr className="text-[#19e6f7]">
+              <tr>
                 <th>{t.orderId}</th>
                 <th>{t.user}</th>
                 <th>{t.service}</th>
@@ -398,7 +398,7 @@ const AdminDashboard = () => {
           </table>
         </section>
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-[#181a19]/60 rounded-xl p-6 h-80">
+          <div className="bg-black rounded-xl p-6 h-80">
             <h3 className="text-lg font-bold text-[#19e6f7] mb-2">{t.analytics}</h3>
             <Bar data={{
               ...barData,
@@ -450,7 +450,7 @@ const AdminDashboard = () => {
               }
             }} />
           </div>
-          <div className="bg-[#181a19]/60 rounded-xl p-6 h-80">
+          <div className="bg-black rounded-xl p-6 h-80">
             <h3 className="text-lg font-bold text-[#19e6f7] mb-2">{t.trafficSources}</h3>
             <Doughnut data={{
               ...doughnutData,

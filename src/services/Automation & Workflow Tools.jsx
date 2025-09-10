@@ -80,6 +80,7 @@ const HeroSection = ({ theme }) => {
         loop
         muted
         playsInline
+        loading="lazy"
         className="absolute inset-0 w-full h-full object-cover z-0"
         src={heroVideo}
       />

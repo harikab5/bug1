@@ -2,7 +2,7 @@ import React from "react";
 import abouthero from '../assets/aboutbg.mp4';
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
-import ourvalues from '../assets/our values.jpeg';
+import ourvalues from '../assets/values.jpeg';
 import empathyImg from '../assets/empathy.jpeg';
 import defineImg from '../assets/define.jpeg';
 import ideasImg from '../assets/ideas.jpeg';
@@ -15,6 +15,9 @@ const AboutUs = () => {
   const { theme } = useTheme();
   const { language } = useLanguage();
   useScrollToTop();
+
+  // Carousel logic for 'What Makes Us Unique'
+  const [uniqueCurrentIndex, setUniqueCurrentIndex] = React.useState(0);
 
   // Translations
   const t = {
@@ -39,12 +42,12 @@ const AboutUs = () => {
       he: "הצמיחה שלנו לאורך השנים"
     },
     growthDesc1: {
-      en: "From launching our first AI platform to becoming a global leader in artificial intelligence solutions, our journey has been marked by continuous innovation and growth.",
+      en: "From launching our first AI platform to becoming a global leader in AI solutions, our journey has been marked by continuous innovation and growth.",
       ar: "من إطلاق أول منصة ذكاء اصطناعي لنا إلى أن أصبحنا روادًا عالميين في حلول الذكاء الاصطناعي، تميزت رحلتنا بالابتكار والنمو المستمر.",
       he: "מהשקת פלטפורמת ה-AI הראשונה שלנו ועד להפיכה למובילים גלובליים בפתרונות AI, המסע שלנו מאופיין בחדשנות וצמיחה מתמדת."
     },
     growthDesc2: {
-      en: "We started with a simple mission: to democratize AI technology and make powerful artificial intelligence tools accessible to businesses of all sizes. Today, we're proud to serve thousands of organizations worldwide, helping them leverage the power of AI to drive innovation, efficiency, and growth.",
+      en: "We started with a simple mission: to democratize AI technology and make powerful AI tools accessible to businesses of all sizes. Today, we are  proud to serve thousands of organizations worldwide, helping them leverage the power of AI to drive innovation, efficiency, and growth.",
       ar: "بدأنا بمهمة بسيطة: ديمقراطية تكنولوجيا الذكاء الاصطناعي وجعل الأدوات القوية متاحة لجميع الشركات. اليوم، نحن فخورون بخدمة آلاف المؤسسات حول العالم، ومساعدتهم على الاستفادة من قوة الذكاء الاصطناعي لتحقيق الابتكار والكفاءة والنمو.",
       he: "התחלנו במשימה פשוטה: להנגיש את טכנולוגיית ה-AI ולספק כלים עוצמתיים לכל סוגי העסקים. כיום אנו גאים לשרת אלפי ארגונים ברחבי העולם ולעזור להם למנף את כוח ה-AI לחדשנות, יעילות וצמיחה."
     },
@@ -113,7 +116,7 @@ const AboutUs = () => {
     },
     missionList: [
       {
-        en: "Deliver cutting-edge AI tools and solutions",
+        en: "Delivering cutting-edge AI tools and solutions",
         ar: "تقديم أدوات وحلول ذكاء اصطناعي متقدمة",
         he: "להציע כלים ופתרונות AI מתקדמים"
       },
@@ -123,12 +126,12 @@ const AboutUs = () => {
         he: "להבטיח נגישות ומחיר לכל סוגי העסקים"
       },
       {
-        en: "Maintain the highest standards of quality and reliability",
+        en: "Maintaining cutting-edge AI tools and solutions",
         ar: "الحفاظ على أعلى معايير الجودة والموثوقية",
         he: "לשמור על סטנדרטים גבוהים של איכות ואמינות"
       },
       {
-        en: "Foster innovation and continuous improvement",
+        en: "Fostering cutting-edge AI tools and solutions",
         ar: "تعزيز الابتكار والتحسين المستمر",
         he: "לקדם חדשנות ושיפור מתמיד"
       }
@@ -338,11 +341,12 @@ const AboutUs = () => {
         <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-black bg-opacity-30' : ''} z-10`}></div>
         <div className="relative z-20 w-full h-full flex flex-col items-center justify-center text-center">
           <h1 className="text-6xl md:text-7xl font-extrabold mb-4 leading-tight tracking-tight">
-            <span className={`${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.heroTitle[language.code]}</span>
+              <span className="text-black">{t.heroTitle[language.code]}</span>
           </h1>
-          <p className="text-lg font-medium mb-4" style={{ color: '#19e6f7' }}>
-            {t.heroSubtitle[language.code]}
-          </p>
+           
+            <p className="text-lg font-medium mb-4" style={{ color: 'black' }}>
+              {t.heroSubtitle[language.code]}
+            </p>
           <p className={`text-2xl md:text-3xl mb-6 font-medium max-w-xl mx-auto ${theme === 'dark' ? 'text-gray-300' : 'text-black'}`}>{t.heroDesc[language.code]}</p>
         </div>
       </section>
@@ -519,17 +523,54 @@ const AboutUs = () => {
       <section className={`py-20 px-4 w-full ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
         <h2 className={`text-4xl font-bold mb-4 text-center ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.uniqueTitle[language.code]}</h2>
         <p className={`text-lg text-center mb-12 max-w-2xl mx-auto ${theme === 'dark' ? 'text-white/90' : 'text-black'}`}>{t.uniqueDesc[language.code]}</p>
-        <div className="overflow-x-auto flex gap-8 pb-4 scroll-smooth snap-x snap-mandatory unique-scrollbar">
-          {t.uniqueCards.map((card, idx) => (
-            <div
-              key={idx}
-              className={`w-[320px] h-[200px] rounded-2xl shadow-lg border-4 flex flex-col items-center justify-center p-8 snap-center flex-shrink-0 unique-card-gradient`}
-              style={{ borderColor: card.border, boxShadow: '0 8px 32px rgba(0, 123, 255, 0.3)' }}
-            >
-              <div className="font-bold text-xl text-white mb-2">{card.title[language.code]}</div>
-              <div className="text-white text-center">{card.desc[language.code]}</div>
+        {/* Carousel Container with 3-card scrolling effect, same as home1.jsx */}
+        <div className="relative">
+          <div className="flex justify-center items-center gap-8 px-16 mb-8 overflow-hidden" style={{ minHeight: '240px' }}>
+            <div className="flex gap-8 transition-all duration-700 ease-in-out" style={{ transform: 'translateX(0)' }}>
+              {(() => {
+                const arr = t.uniqueCards;
+                const leftIndex = uniqueCurrentIndex === 0 ? arr.length - 1 : uniqueCurrentIndex - 1;
+                const rightIndex = uniqueCurrentIndex === arr.length - 1 ? 0 : uniqueCurrentIndex + 1;
+                const visible = [leftIndex, uniqueCurrentIndex, rightIndex];
+                return visible.map((idx, i) => (
+                  <div
+                    key={idx}
+                    className={`w-96 rounded-xl shadow-lg p-8 text-center transition-all duration-500 ease-in-out flex-shrink-0 ${
+                      i === 1
+                        ? 'scale-110 opacity-100 z-10 shadow-2xl'
+                        : 'scale-90 opacity-60 z-0 blur-sm'
+                    }`}
+                    style={{
+                      background: 'linear-gradient(90deg, #004F51 0%, #005F60 20%, #00797B 40%, #00989C 60%, #56BFC3 80%, #B2DFDF 100%)',
+                      transform: i === 1 ? 'translateY(0)' : 'translateY(10px)',
+                      filter: i === 1 ? 'none' : 'blur(2px)'
+                    }}
+                  >
+                    <div className={`font-bold text-lg mb-2 transition-all duration-300 text-white`}>{arr[idx].title[language.code]}</div>
+                    <div className={`text-sm mb-3 transition-all duration-300 text-white`}>{arr[idx].desc[language.code]}</div>
+                  </div>
+                ));
+              })()}
             </div>
-          ))}
+          </div>
+          {/* Number Navigation */}
+          <div className="flex justify-center gap-3 mt-6">
+            {t.uniqueCards.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setUniqueCurrentIndex(index)}
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
+                  uniqueCurrentIndex === index
+                    ? 'bg-gradient-to-r from-[#27bdb5] to-[#1de9b6] text-white shadow-lg'
+                    : theme === 'dark'
+                      ? 'bg-gradient-to-r from-black to-[#0a2342] text-[#27bdb5] hover:bg-[#27bdb5] hover:text-white'
+                      : 'bg-gradient-to-r from-gray-200 to-[#b2dfdb] text-[#27bdb5] hover:bg-[#27bdb5] hover:text-white'
+                }`}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 

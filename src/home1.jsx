@@ -13,11 +13,11 @@ export default function HomePage() {
     en: {
       discover: 'Discover AI Tools',
       title: 'The Ultimate Platform for\nAI Tools & Automation',
-      explore: 'Explore, compare, and leverage the best AI tools for productivity, automation, content creation, analytics, and more all in one place.',
+      explore: 'Explore, compare, and leverage the best AI tools for productivity, automation, content creation, analytics.',
       exploreNow: 'Explore Now',
       who: 'WHO WE ARE',
       trusted: 'Your Trusted AI Innovation Partner',
-      about: 'We are a passionate team dedicated to making artificial intelligence accessible and practical for everyone. Our platform curates, reviews, and showcases the best AI tools for productivity, automation, analytics, and creativity. Whether you\'re a business, developer, or enthusiast, we help you discover and leverage the right AI solutions to transform your workflow and unlock new possibilities.',
+      about: 'We are a passionate team dedicated to making AI accessible and practical for everyone. Our platform curates, reviews, and showcases the best AI tools for productivity, automation, analytics, and creativity. Whether you are a business, developer, or enthusiast, we can help you discover and leverage the right AI solutions to transform your workflow and unlock new possibilities.',
       knowMore: 'Know More',
       services: 'OUR SERVICES',
       what: 'WHAT WE DO',
@@ -260,13 +260,14 @@ export default function HomePage() {
         <div className="absolute inset-0 w-full h-full z-0">
         <video
           autoPlay
-            muted 
+          muted
           loop
-            className="w-full h-full object-cover"
-            style={{ filter: theme === 'dark' ? 'brightness(0.6)' : 'brightness(0.9)' }}
+          loading="lazy"
+          className="w-full h-full object-cover"
+          style={{ filter: theme === 'dark' ? 'brightness(0.6)' : 'brightness(0.9)' }}
         >
-            <source src={homeHeroVideo} type="video/mp4" />
-            Your browser does not support the video tag.
+          <source src={homeHeroVideo} type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
         </div>
         {/* Left: Text Content */}
@@ -279,7 +280,14 @@ export default function HomePage() {
           <h1 className="font-extrabold mb-6 text-center text-white text-4xl sm:text-5xl md:text-6xl lg:text-6xl leading-tight max-w-6xl">
             {t.title}
           </h1>
-          <p className="mb-8 text-center text-white text-lg max-w-lg">
+          <p className="mb-8 text-center text-white text-lg max-w-lg" style={{
+            textShadow: '0 2px 8px rgba(0,0,0,0.7), 0 1px 0 #19e6f7',
+            background: 'rgba(10,35,66,0.45)',
+            borderRadius: '0.5rem',
+            padding: '0.5rem 1rem',
+            fontWeight: 'bold',
+            letterSpacing: '0.02em',
+          }}>
             {t.explore}
           </p>
           <div className="flex justify-center mb-8 mt-4 w-full">
@@ -295,13 +303,12 @@ export default function HomePage() {
       <section className={`w-full py-16 px-4 flex flex-col md:flex-row items-center justify-center gap-4 mx-auto ${theme === 'dark' ? 'bg-[#111211]' : 'bg-white'}`} dir={language.dir}>
          {/* Left: Text Content */}
          <div className="flex-1 max-w-lg pl-4 md:pl-8">
-           <div className="text-[#27bdb5] text-sm font-semibold mb-2 tracking-wider">{t.who}</div>
           <h2 className={`text-3xl md:text-4xl font-extrabold mb-4 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
-             {t.trusted}
-           </h2>
+            {t.trusted}
+          </h2>
           <p className={`${theme === 'dark' ? 'text-white' : 'text-black'} text-base md:text-lg mb-6`}>
             <div className="text-justify">
-            {t.about}
+              {t.about}
             </div>
           </p>
           <button 
@@ -336,7 +343,9 @@ export default function HomePage() {
             };
             const cardDesc = {
               en: [
-                'A diverse group of AI enthusiasts, engineers, and innovators committed to driving progress in artificial intelligence.',
+                'A diverse group of AI enthusiasts, engineers, and innovators committed to driving AI progress.',
+
+
                 'Our platform is relied upon by top companies and professionals to discover, evaluate, and implement cutting-edge AI solutions.',
                 'We foster a collaborative environment where users can share, review, and discover the best AI tools together.',
                 'We value creativity, transparency, and ethical AI development in everything we do.',
@@ -463,7 +472,7 @@ export default function HomePage() {
             {/* Center: Description */}
             <div className={`flex-1 text-justify text-base md:text-lg max-w-xl mx-auto md:mx-0 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{
               {
-                en: 'Empowering businesses and developers with cutting-edge AI tools for automation, analytics, and innovation. Trusted by industry leaders to drive digital transformation and smarter workflows. Our platform supports seamless integration, robust security, and real-time insights for every industry. Experience the future of work with scalable, reliable, and user-friendly AI solutions tailored to your needs.',
+                en: 'Empowering businesses and developers with cutting-edge AI tools for automation, analytics, and innovation. Industry leaders trust it to drive digital transformation and smarter workflows. Our platform supports seamless integration, robust security, and real-time insights for every industry. Experience the future of work with scalable, reliable, and user-friendly AI solutions tailored to your needs.',
                 ar: 'تمكين الشركات والمطورين بأدوات الذكاء الاصطناعي المتقدمة للأتمتة والتحليلات والابتكار. موثوق به من قبل قادة الصناعة لدفع التحول الرقمي وسير العمل الذكي. تدعم منصتنا التكامل السلس والأمان القوي والرؤى الفورية لكل صناعة. اختبر مستقبل العمل مع حلول الذكاء الاصطناعي القابلة للتطوير والموثوقة وسهلة الاستخدام المصممة خصيصًا لاحتياجاتك.',
                 he: 'העצמת עסקים ומפתחים עם כלי AI מתקדמים לאוטומציה, אנליטיקה וחדשנות. אמון על ידי מובילי תעשייה להניע טרנספורמציה דיגיטלית וזרימות עבודה חכמות. הפלטפורמה שלנו תומכת באינטגרציה חלקה, אבטחה חזקה ותובנות בזמן אמת לכל תעשייה. חווה את עתיד העבודה עם פתרונות AI ניתנים להרחבה, אמינים וידידותיים למשתמש המותאמים לצרכים שלך.'
               }[language.code]
@@ -628,7 +637,7 @@ export default function HomePage() {
             <p className={`text-lg mb-10 ${theme === 'dark' ? 'text-[#bfc1be]' : 'text-[#222]'}`}>
               <div className="text-justify">{
                 {
-                  en: 'Explore a curated collection of powerful AI tools designed to boost productivity, automate tasks, and unlock new possibilities for your business or personal projects. An enterprise seeking digital transformation, or a developer building the next big thing, our comprehensive suite of AI tools empowers you to work smarter, not harder. Discover machine learning models that predict trends. Start your AI journey today and stay ahead in the digital era with tools that adapt, learn, and grow with your needs.',
+                  en: 'Explore a curated collection of powerful AI tools designed to boost productivity, automate tasks, and unlock new possibilities for your business or personal projects. An enterprise seeking digital transformation, or a developer building the next big thing, our comprehensive suite of AI tools empowers you to work smarter, not harder. Discover machine learning models that  can predict trends. Start your AI journey today and stay ahead in the digital era with tools that adapt, learn, and grow according your needs.',
                   ar: 'استكشف مجموعة مختارة من أدوات الذكاء الاصطناعي القوية المصممة لتعزيز الإنتاجية وأتمتة المهام وفتح إمكانيات جديدة لعملك أو مشاريعك الشخصية. سواء كنت مؤسسة تسعى للتحول الرقمي أو مطورًا يبني الشيء الكبير التالي، فإن مجموعتنا الشاملة من أدوات الذكاء الاصطناعي تمكنك من العمل بذكاء أكبر، وليس بجهد أكبر. اكتشف نماذج التعلم الآلي التي تتنبأ بالاتجاهات. ابدأ رحلتك مع الذكاء الاصطناعي اليوم وابقَ في صدارة العصر الرقمي مع أدوات تتكيف وتتعلم وتنمو مع احتياجاتك.',
                   he: 'חקור אוסף מובחר של כלי AI חזקים שנועדו להעצים פרודוקטיביות, לאוטומציה משימות ולפתוח אפשרויות חדשות לעסק או לפרויקטים האישיים שלך. בין אם אתה ארגון שמחפש טרנספורמציה דיגיטלית, או מפתח שבונה את הדבר הגדול הבא, מערך כלי ה-AI המקיף שלנו מעצים אותך לעבוד חכם יותר, לא קשה יותר. גלה מודלים של למידת מכונה שמנבאים מגמות. התחל את מסע ה-AI שלך היום והישאר מוביל בעידן הדיגיטלי עם כלים שמסתגלים, לומדים וצומחים עם הצרכים שלך.'
                 }[language.code]

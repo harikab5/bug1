@@ -79,6 +79,7 @@ const HeroSection = ({ theme, language }) => {
         loop
         muted
         playsInline
+        loading="lazy"
         className="absolute inset-0 w-full h-full object-cover z-0"
         src={nlpHeroVideo}
       />
@@ -452,6 +453,43 @@ const PricingSection = ({ theme, language }) => {
         }
       ],
       popular: false
+    },
+    {
+      name: {
+        en: "Professional",
+        ar: "احترافي",
+        he: "מקצועי"
+      },
+      price: "$299",
+      period: monthText[language.code] ? `/ ${monthText[language.code]}` : "",
+      desc: {
+        en: "For growing teams and professionals",
+        ar: "للفرق المتنامية والمحترفين",
+        he: "לצוותים מתפתחים ואנשי מקצוע"
+      },
+      features: [
+        {
+          en: `Advanced ${nlpText[language.code] || "NLP"} Processing`,
+          ar: `معالجة ${nlpText[language.code] || "NLP"} متقدمة`,
+          he: `עיבוד ${nlpText[language.code] || "NLP"} מתקדם`
+        },
+        {
+          en: `Up to 100,000 ${(apiText && apiText[language.code]) || "API"} calls/${monthText[language.code] || "month"}`,
+          ar: `حتى 100,000 مكالمة ${(apiText && apiText[language.code]) || "API"} ${monthText[language.code] || "شهريًا"}`,
+          he: `עד 100,000 קריאות ${(apiText && apiText[language.code]) || "API"} ב${monthText[language.code] || "לחודש"}`
+        },
+        {
+          en: "Priority Email Support",
+          ar: "دعم عبر البريد الإلكتروني أولوية",
+          he: "תמיכה בדוא\"ל עדיפות"
+        },
+        {
+          en: "Team Collaboration Tools",
+          ar: "أدوات التعاون بين الفرق",
+          he: "כלי שיתוף פעולה לצוותים"
+        }
+      ],
+      popular: true
     },
     {
       name: {

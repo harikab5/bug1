@@ -71,25 +71,25 @@ const HeroSection = ({ theme }) => {
       whileInView="visible"
       viewport={{ once: false }}
       variants={fadeUp}
-      className="relative text-white py-20 text-center shadow-2xl overflow-hidden w-full px-4 md:px-8 lg:px-16 bg-black min-h-[700px]"
+      className="relative text-white py-20 text-center shadow-2xl overflow-hidden w-full px-4 md:px-8 lg:px-16 bg-black min-h-[600px]"
     >
       <video
         autoPlay
         loop
         muted
         playsInline
+        loading="lazy"
         className="absolute inset-0 w-full h-full object-cover z-0"
         src={contentVideo}
       />
       <div className="bg-black bg-opacity-60 absolute inset-0"></div>
-      <div className="relative z-10">
+  <div className="relative z-10 pt-12">
         <motion.h1 variants={fadeUp} className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#19e6f7] to-[#179b8e] bg-clip-text text-transparent">
           {t.title[language.code]}
         </motion.h1>
+         
         <motion.p variants={fadeUp} className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto mb-8">
           {t.subtitle[language.code]}
-        </motion.p>
-        <motion.p variants={fadeUp} className="text-lg text-white/80 max-w-3xl mx-auto mb-10">
           {t.desc[language.code]}
         </motion.p>
         <motion.div variants={fadeUp} className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">

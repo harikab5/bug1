@@ -30,7 +30,7 @@ export default function Footer({ theme }) {
       ourServices: 'Our Services',
       getInTouch: 'Get In Touch',
       phone: '+919390594407',
-      email: 'ai@tools.in',
+  email: 'stackly.com', // Do not translate
       location: 'India',
       hours: 'Mon - Fri: 9am - 6pm',
       startJourney: 'Start Your AI Journey',
@@ -51,7 +51,7 @@ export default function Footer({ theme }) {
       ourServices: 'خدماتنا',
       getInTouch: 'تواصل معنا',
       phone: '+919390594407',
-      email: 'ai@tools.in',
+  email: 'لا تترج', // لا تترجم
       location: 'الهند',
       hours: 'الإثنين - الجمعة: 9 صباحًا - 6 مساءً',
       startJourney: 'ابدأ رحلتك مع الذكاء الاصطناعي',
@@ -72,7 +72,7 @@ export default function Footer({ theme }) {
       ourServices: 'השירותים שלנו',
       getInTouch: 'צור קשר',
       phone: '+919390594407',
-      email: 'ai@tools.in',
+  email: 'אל תתרג', // אל תתרגם
       location: 'הודו',
       hours: 'ב׳ - ו׳: 9:00 - 18:00',
       startJourney: 'התחל את מסע ה-AI שלך',
@@ -99,7 +99,9 @@ export default function Footer({ theme }) {
           {/* Company Info & Social */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
             <img src={logo} loading="lazy" alt="Logo" className="h-16 md:h-20 w-auto mb-4 md:pr-20 md:-ml-14 md:-mt-6" />
-            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">{t.company}</h3>
+            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]" style={{
+              color: '#12716c',
+            }}>{t.company}</h3>
             <p className={theme === "dark" ? "text-gray-300 text-sm leading-relaxed mb-6 max-w-xs" : "text-black text-sm leading-relaxed mb-6 max-w-xs"}>
               {t.leading}
             </p>
@@ -130,7 +132,7 @@ export default function Footer({ theme }) {
 
           {/* Quick Links */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
-            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">
+            <h3 className="text-xl font-bold mb-6 text-[#12716c]">
               {t.quickLinks}
             </h3>
             <ul className="space-y-3">
@@ -155,7 +157,9 @@ export default function Footer({ theme }) {
 
           {/* Services */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
-            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">{t.ourServices}</h3>
+            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]" style={{
+              color: '#12716c',
+            }}>{t.ourServices}</h3>
             <ul className="space-y-3">
               {[
                 {
@@ -221,7 +225,9 @@ export default function Footer({ theme }) {
 
           {/* Contact & CTA */}
           <div className={`${theme === "dark" ? "flex flex-col items-start text-left" : "flex flex-col items-start text-left text-black"} w-full md:w-auto mb-8 md:mb-0`}>
-            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]">{t.getInTouch}</h3>
+            <h3 className="text-xl font-bold mb-6 text-[#27bdb5]" style={{
+              color: '#12716c',
+            }}>{t.getInTouch}</h3>
             <div className="space-y-4 mb-6 w-full max-w-xs md:max-w-xs">
               <div className={theme === "dark" ? "flex items-center text-gray-300" : "flex items-center text-black"}>
                 <FaPhoneAlt className="mr-3 text-[#27bdb5]" />

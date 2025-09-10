@@ -28,13 +28,13 @@ const translations = {
     helpTitle: "How can we help?",
     visitUs: "VISIT US",
     visitUsDesc: "Visit our AI innovation center to see cutting-edge tools and discuss your AI transformation journey with our experts",
-    visitUsAddr: "2 Elizabeth St. London, UK",
-    callUs: "CALL US",
-    callUsDesc: "Speak directly with our AI specialists to get personalized solutions for your business automation",
-    callUsPhone: "+44 (0) 203 116 7711",
-    contactUsCard: "CONTACT US",
-    contactUsDesc: "Send us your AI project requirements and we'll respond with customized solutions and implementation strategies",
-    contactUsSite: "stackly.com",
+  visitUsAddr: "India",
+  callUs: "CALL US",
+  callUsDesc: "Speak directly with our AI specialists to get personalized solutions for your business automation",
+  callUsPhone: "+919390594407",
+  contactUsCard: "CONTACT US",
+  contactUsDesc: "Send us your AI project requirements and we'll respond with customized solutions and implementation strategies",
+  contactUsSite: "stackly.com",
     findUs: "Find Us",
     newsletterTitle: "Subscribe to our AI Newsletter",
     newsletterDesc: "Get the latest updates, AI trends, and exclusive offers from our team. No spam, just smart insights!",
@@ -58,13 +58,13 @@ const translations = {
     helpTitle: "كيف يمكننا المساعدة؟",
     visitUs: "زرنا",
     visitUsDesc: "قم بزيارة مركز الابتكار الخاص بنا لمشاهدة أحدث الأدوات ومناقشة رحلة التحول بالذكاء الاصطناعي مع خبرائنا",
-    visitUsAddr: "2 إليزابيث ستريت، لندن، المملكة المتحدة",
-    callUs: "اتصل بنا",
-    callUsDesc: "تحدث مباشرة مع متخصصي الذكاء الاصطناعي لدينا للحصول على حلول مخصصة لأتمتة أعمالك",
-    callUsPhone: "+44 (0) 203 116 7711",
-    contactUsCard: "تواصل معنا",
-    contactUsDesc: "أرسل متطلبات مشروع الذكاء الاصطناعي الخاص بك وسنرد عليك بحلول مخصصة واستراتيجيات التنفيذ",
-    contactUsSite: "stackly.com",
+  visitUsAddr: "الهند",
+  callUs: "اتصل بنا",
+  callUsDesc: "تحدث مباشرة مع متخصصي الذكاء الاصطناعي لدينا للحصول على حلول مخصصة لأتمتة أعمالك",
+  callUsPhone: "+919390594407",
+  contactUsCard: "تواصل معنا",
+  contactUsDesc: "أرسل متطلبات مشروع الذكاء الاصطناعي الخاص بك وسنرد عليك بحلول مخصصة واستراتيجيات التنفيذ",
+  contactUsSite: "stackly.com",
     findUs: "اعثر علينا",
     newsletterTitle: "اشترك في نشرتنا الإخبارية للذكاء الاصطناعي",
     newsletterDesc: "احصل على آخر التحديثات واتجاهات الذكاء الاصطناعي والعروض الحصرية من فريقنا. لا سبام، فقط رؤى ذكية!",
@@ -88,13 +88,13 @@ const translations = {
     helpTitle: "איך נוכל לעזור?",
     visitUs: "בקר אותנו",
     visitUsDesc: "בקר במרכז החדשנות שלנו כדי לראות כלים מתקדמים ולדון במסע ה-AI שלך עם המומחים שלנו",
-    visitUsAddr: "2 Elizabeth St. London, UK",
-    callUs: "התקשר אלינו",
-    callUsDesc: "שוחח ישירות עם מומחי ה-AI שלנו לקבלת פתרונות מותאמים אישית לאוטומציה עסקית",
-    callUsPhone: "+44 (0) 203 116 7711",
-    contactUsCard: "צור קשר",
-    contactUsDesc: "שלח לנו את דרישות פרויקט ה-AI שלך ונשיב עם פתרונות מותאמים ואסטרטגיות יישום",
-    contactUsSite: "stackly.com",
+  visitUsAddr: "הודו",
+  callUs: "התקשר אלינו",
+  callUsDesc: "שוחח ישירות עם מומחי ה-AI שלנו לקבלת פתרונות מותאמים אישית לאוטומציה עסקית",
+  callUsPhone: "+919390594407",
+  contactUsCard: "צור קשר",
+  contactUsDesc: "שלח לנו את דרישות פרויקט ה-AI שלך ונשיב עם פתרונות מותאמים ואסטרטגיות יישום",
+  contactUsSite: "stackly.com",
     findUs: "מצא אותנו",
     newsletterTitle: "הירשם לניוזלטר ה-AI שלנו",
     newsletterDesc: "קבל עדכונים אחרונים, מגמות AI והצעות בלעדיות מהצוות שלנו. אין ספאם, רק תובנות חכמות!",
@@ -253,15 +253,16 @@ const Contact = () => {
   const faqs = faqsTranslations[language.code];
 
   return (
-    <div className="w-full flex flex-col" style={{background: '#111211', minHeight: '100vh'}} dir={language.dir} lang={language.code}>
+    <div className="w-full flex flex-col" style={{background: '#111211', minHeight: '40vh'}} dir={language.dir} lang={language.code}>
       {/* Hero Section with Background Video */}
-      <section className="relative w-full flex flex-col items-center justify-center px-6 md:px-16 bg-[#111211] overflow-hidden" style={{height: '100vh'}}>
+      <section className="relative w-full flex flex-col items-center justify-center px-6 md:px-16 bg-[#111211] overflow-hidden" style={{height: '80vh'}}>
         {/* Background Video */}
         <video
           autoPlay
           loop
           muted
           playsInline
+          loading="lazy"
           className="absolute inset-0 w-full h-full object-cover z-0"
         >
           <source src={contacthero} type="video/mp4" />
@@ -284,51 +285,52 @@ const Contact = () => {
       {/* Background Section with Gradient */}
       <section className="w-full" style={{background: '#000000'}}>
         {/* Modern Contact Form Section */}
-        <section ref={formRef} className="w-full flex flex-col md:flex-row shadow-xl overflow-hidden" style={{background: '#000000'}}>
+  <section ref={formRef} className="w-full flex flex-col md:flex-row shadow-xl overflow-hidden min-h-[700px]" style={{background: '#000000'}}>
           {/* Left Column - Image */}
-          <div className={`md:w-1/2 w-full flex items-start justify-center p-0 pt-8 md:pt-12 ${theme === 'dark' ? 'bg-transparent' : 'bg-white'}`}>
-            <img src={formImg} loading="lazy" alt="Contact Visual" className="object-cover w-full rounded-none md:rounded-r-2xl" style={{maxHeight: '700px'}} />
+          <div className={`md:w-1/2 w-full flex items-stretch justify-center p-0 pt-8 md:pt-12 ${theme === 'dark' ? 'bg-transparent' : 'bg-white'}`}
+            style={{minHeight: '90%'}}>
+            <img src={formImg} loading="lazy" alt="Contact Visual" className="object-cover w-full h-full rounded-none md:rounded-r-2xl" style={{height: '90%', minHeight: '100%'}} />
           </div>
           {/* Right Column - Form */}
-          <div className={`md:w-1/2 w-full flex flex-col justify-start p-8 md:p-12 ${theme === 'dark' ? '' : 'bg-white'}`}>
+          <div className={`md:w-3/4 w-full flex flex-col justify-start p-12 md:p-20 mx-auto`} style={{minHeight: '100%', background: theme === 'dark' ? '' : 'white'}}>
             <h2 className={`text-3xl font-bold mb-2 text-center ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.generalInquiries}</h2>
             <p className={`text-center mb-6 text-sm ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
               <div className="text-justify">{t.enterDetails}</div>
             </p>
-            <form className="flex flex-col gap-6" onSubmit={handleFormSubmit}>
+            <form className="flex flex-col gap-8" onSubmit={handleFormSubmit}>
               <div>
-                <label className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.yourName}</label>
+                <label className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.yourName} <span style={{color: 'red'}}>*</span></label>
                 <input 
                   type="text" 
                   placeholder={t.yourName} 
-                  className="w-full border border-[#8e878a] rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-[#04D9FF] focus:border-[#04D9FF] text-[#111211]" 
+                  className="w-full border border-[#8e878a] rounded-lg px-5 py-5 text-lg focus:outline-none focus:ring-2 focus:ring-[#04D9FF] focus:border-[#04D9FF] text-[#111211]" 
                   required 
                 />
               </div>
               <div>
-                <label className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.yourEmail}</label>
+                <label className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.yourEmail} <span style={{color: 'red'}}>*</span></label>
                 <input 
                   type="email" 
                   placeholder={t.yourEmail} 
-                  className="w-full border border-[#8e878a] rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-[#04D9FF] focus:border-[#04D9FF] text-[#111211]" 
+                  className="w-full border border-[#8e878a] rounded-lg px-5 py-5 text-lg focus:outline-none focus:ring-2 focus:ring-[#04D9FF] focus:border-[#04D9FF] text-[#111211]" 
                   required 
                 />
               </div>
               <div>
-                <label className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.yourSubject}</label>
+                <label className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.yourSubject} <span style={{color: 'red'}}>*</span></label>
                 <input 
                   type="text" 
                   placeholder={t.yourSubject} 
-                  className="w-full border border-[#8e878a] rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-[#04D9FF] focus:border-[#04D9FF] text-[#111211]" 
+                  className="w-full border border-[#8e878a] rounded-lg px-5 py-5 text-lg focus:outline-none focus:ring-2 focus:ring-[#04D9FF] focus:border-[#04D9FF] text-[#111211]" 
                   required 
                 />
               </div>
               <div>
-                <label className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.message}</label>
+                <label className={`block font-medium mb-2 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{t.message} <span style={{color: 'red'}}>*</span></label>
                 <textarea 
                   placeholder={t.message} 
-                  className="w-full border border-[#8e878a] rounded-lg px-3 py-3 focus:outline-none focus:ring-2 focus:ring-[#04D9FF] focus:border-[#04D9FF] text-[#111211] resize-none" 
-                  rows={4} 
+                  className="w-full border border-[#8e878a] rounded-lg px-5 py-5 text-lg focus:outline-none focus:ring-2 focus:ring-[#04D9FF] focus:border-[#04D9FF] text-[#111211] resize-none" 
+                  rows={8} 
                   required 
                 />
               </div>
