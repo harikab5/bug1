@@ -542,10 +542,10 @@ const SecondHome = () => {
  
 
   return (
-    <div className={`${theme === "dark" ? "bg-[#121212] text-white" : "bg-gray-50 text-black"}`}>
+    <div className={`${theme === "dark" ? "bg-[#121212] text-white" : "bg-gray-50 text-black"}`}> 
       {/* 1. Hero/Intro Section */}
       <section
-        className={`${theme === "dark" ? "relative text-white py-12 shadow-2xl overflow-hidden w-full px-4 md:px-8 lg:px-16 bg-[#121212] min-h-[670px] flex items-center justify-center" : "relative text-black py-12 shadow-2xl overflow-hidden w-full px-4 md:px-8 lg:px-16 bg-gray-100 min-h-[750px] flex items-center justify-center"}`}
+        className={`${theme === "dark" ? "relative text-white py-8 shadow-2xl overflow-hidden w-full px-2 sm:px-4 md:px-8 lg:px-16 bg-[#121212] min-h-[400px] flex flex-col items-center justify-center" : "relative text-black py-8 shadow-2xl overflow-hidden w-full px-2 sm:px-4 md:px-8 lg:px-16 bg-gray-100 min-h-[400px] flex flex-col items-center justify-center"}`}
         style={{
           backgroundImage: `url(${heroVideo})`,
           backgroundSize: 'cover',
@@ -565,30 +565,30 @@ const SecondHome = () => {
           <source src={heroVideo} type="video/mp4" />
         </video>
         <div className={`absolute inset-0 ${theme === 'dark' ? 'bg-black bg-opacity-60' : ''}`}></div>
-        <div className="relative z-10 max-w-3xl px-4 py-8 flex flex-col items-center justify-center text-center mx-auto" style={{textShadow: theme === 'dark' ? '0 2px 16px #000, 0 1px 2px #000' : 'none'}}>
-          <span className="uppercase text-sm font-semibold tracking-widest text-[#19e6f7] mb-6">{{
+        <div className="relative z-10 w-full max-w-3xl px-2 sm:px-4 py-6 flex flex-col items-center justify-center text-center mx-auto" style={{textShadow: theme === 'dark' ? '0 2px 16px #000, 0 1px 2px #000' : 'none'}}>
+          <span className="uppercase text-xs sm:text-sm font-semibold tracking-widest text-[#19e6f7] mb-4 sm:mb-6">{{
             en: 'AI Solutions',
             ar: 'حلول الذكاء الاصطناعي',
             he: 'פתרונות AI',
           }[language.code]}</span>
-          <h1 className="text-5xl md:text-6xl font-extrabold mb-6 leading-tight whitespace-nowrap text-white">{{
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-4 sm:mb-6 leading-tight text-white">{{
             en: 'Revolutionize Your Workflow with',
             ar: 'حوّل سير عملك مع',
             he: 'הפוך את זרימת העבודה שלך עם',
           }[language.code]} <span style={{color: '#19e6f7'}}>AI</span></h1>
-          <h2 className="text-2xl md:text-2xl font-semibold mb-6 text-white">{{
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 sm:mb-6 text-white">{{
             en: 'Harness the power of next-gen artificial intelligence to automate, analyze, and accelerate your business.',
             ar: 'استفد من قوة الذكاء الاصطناعي الحديث لأتمتة وتحليل وتسريع أعمالك.',
             he: 'נצל את כוח ה-AI מהדור הבא לאוטומציה, ניתוח והאצת העסק שלך.',
           }[language.code]}</h2>
-          <p className="text-lg md:text-xl mb-10 text-white">{{
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-10 text-white">{{
             en: `From task automation to advanced data analytics and intelligent decision-making, our AI tools empower teams to work smarter—not harder. Whether you're a startup or a large enterprise, our scalable AI solutions adapt to your needs and transform the way you operate.`,
             ar: 'من أتمتة المهام إلى تحليلات البيانات المتقدمة واتخاذ القرار الذكي، أدوات الذكاء الاصطناعي لدينا تمكّن الفرق من العمل بذكاء وليس بجهد. سواء كنت شركة ناشئة أو مؤسسة كبيرة، حلولنا القابلة للتوسع تتكيف مع احتياجاتك وتغير طريقة عملك.',
             he: 'מאוטומציה של משימות ועד ניתוח נתונים מתקדם וקבלת החלטות חכמה, כלי ה-AI שלנו מאפשרים לצוותים לעבוד חכם יותר, לא קשה יותר. בין אם אתה סטארטאפ או ארגון גדול, פתרונות ה-AI שלנו מותאמים לצרכים שלך ומשנים את אופן הפעולה שלך.',
           }[language.code]}</p>
           <button 
             onClick={() => handleNavigation('/contact-us')}
-            className="inline-block px-10 py-4 rounded-full font-bold text-lg text-white hover:scale-105 transition-transform duration-300"
+            className="inline-block px-6 py-3 sm:px-10 sm:py-4 rounded-full font-bold text-base sm:text-lg text-white hover:scale-105 transition-transform duration-300"
             style={{backgroundColor: '#19e6f7', marginBottom: '0.5rem'}}>
             {{
               en: 'Get Started Free',
