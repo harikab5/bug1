@@ -7,7 +7,7 @@ import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
 import { useRole } from "./context/RoleContext";
 import { useLanguage } from "./context/LanguageContext";
-
+import { useState } from "react";
 const servicesDropdown = [
   {
     name: {
@@ -103,7 +103,15 @@ export default function Header({ theme, toggleTheme }) {
   const t = strings[language.code] || strings.en;
   const [menuOpen, setMenuOpen] = React.useState(false);
   const { isAdmin, setIsAdmin } = useRole();
+
   const navigate = useNavigate();
+  const [serviceDropdown, setServicesDropdown] = useState(false);
+  const [homeDropdown, setHomeDropdown] = useState(false);
+  const [servicesTimeout, setServicesTimeout] = useState(null);
+  const [homeTimeout, setHomeTimeout] = useState(null);
+
+
+
 
   // Function to handle navigation with scroll to top
   const handleNavigation = (path) => {
@@ -116,10 +124,38 @@ export default function Header({ theme, toggleTheme }) {
   const email = user.email || "";
   let initials = "";
   if (user.firstName && user.lastName) {
-    initials = `${user.firstName[0] || ""}${user.lastName[0] || ""}`.toUpperCase();
+    initials = ((user.firstName[0] || "") + (user.lastName[0] || "")).toUpperCase();
   } else if (email) {
     initials = email.slice(0, 2).toUpperCase();
   }
+  const handleServicesMouseEnter = () => {
+    if (servicesTimeout) {
+      clearTimeout(servicesTimeout);
+      setServicesTimeout(null);
+    }
+    setServicesDropdown(true);
+  };
+  const handleServicesMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setServicesDropdown(false);
+    }, 300); // 300ms delay before closing
+    setServicesTimeout(timeout);
+  };
+
+  // Home dropdown handlers
+  const handleHomeMouseEnter = () => {
+    if (homeTimeout) {
+      clearTimeout(homeTimeout);
+      setHomeTimeout(null);
+    }
+    setHomeDropdown(true);
+  };
+  const handleHomeMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setHomeDropdown(false);
+    }, 300); // 300ms delay before closing
+    setServicesTimeout(timeout);
+  };
 
   // Logout handler
   const handleLogout = () => {
@@ -137,11 +173,10 @@ export default function Header({ theme, toggleTheme }) {
 
   return (
     <header
-      className={`${
-        theme === "dark"
+      className={`${theme === "dark"
           ? "bg-[#181a19] text-white"
           : "bg-gray-100 text-black"
-      } w-full flex items-center justify-between px-6 md:px-12 py-4 md:py-6 shadow-2xl sticky top-0 z-50 transition-all duration-300`}
+        } w-full flex items-center justify-between px-6 md:px-12 py-4 md:py-6 shadow-2xl sticky top-0 z-50 transition-all duration-300`}
       dir={language.dir}
     >
       {/* Logo */}
@@ -162,111 +197,82 @@ export default function Header({ theme, toggleTheme }) {
       {/* Nav and Avatar aligned right */}
       <div className="flex items-center gap-4 ml-auto">
         <nav
-          className={`hidden md:flex items-center gap-8 ${
-            theme === "dark" ? "text-white" : "text-black"
-          }`}
+          className={`hidden md:flex items-center gap-8 ${theme === "dark" ? "text-white" : "text-black"
+            }`}
           dir={language.dir}
         >
           {/* Home Dropdown */}
-          <div className="relative inline-block text-left">
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => handleNavigation("/home1")}
-                className={`font-semibold text-lg focus:outline-none transition-colors duration-300
-                    ${
-                      theme === "dark"
-                        ? location === "/home1" || location === "/home2"
-                          ? "text-[#19e6f7]"
-                          : "text-white hover:text-[#19e6f7]"
-                        : location === "/home1" || location === "/home2"
-                        ? "text-[#19e6f7]"
-                        : "text-black hover:text-[#19e6f7]"
-                    }`}
+          <div className="relative">
+            <span
+              className={`text-base cursor-pointer font-semibold flex items-center gap-1     rounded-lg focus:outline-none transition-all duration-200 `}
+              onClick={() => {
+                navigate("/home");
+
+              }}
+              onMouseEnter={handleHomeMouseEnter}
+              onMouseLeave={handleHomeMouseLeave}
+              onFocus={() => setHomeDropdown(true)}
+              onBlur={() => setHomeDropdown(false)}
+            >
+              {t.home}
+
+              <svg
+                className="w-5 h-5 ml-1"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
               >
-                {t.home}
-              </button>
-              <Menu as="div" className="relative inline-block text-left">
-                <Menu.Button
-                  className={`focus:outline-none transition-colors duration-300
-                  ${
-                    theme === "dark"
-                      ? "text-white hover:text-[#19e6f7]"
-                      : "text-black hover:text-[#19e6f7]"
-                  }`}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </span>
+            {homeDropdown && (
+              <div
+                className={`absolute left-0 mt-2 w-60 border rounded-xl shadow-xl z-50 transition-colors duration-200 bg-white text-black  `}
+                onMouseEnter={handleHomeMouseEnter}
+                onMouseLeave={handleHomeMouseLeave}
+              >
+                <div
+                  className={`block px-4 py-2 text-base rounded-lg transition-colors duration-200 cursor-pointer border-b  `}
+                  onClick={() => {
+                    setHomeDropdown(false);
+                    navigate("/home1");
+
+                  }}
                 >
-                  <FaChevronDown className="ml-1 text-xs" />
-                </Menu.Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
+                  {t.home1}
+
+                </div>
+                <div
+                  className={`block px-4 py-2 text-base rounded-lg transition-colors duration-200 cursor-pointer border-b   `}
+                  onClick={() => {
+                    setHomeDropdown(false);
+                    navigate("/home2");
+
+                  }}
                 >
-                  {/* ✅ FIX: allow scroll inside dropdown */}
-                  <Menu.Items
-                    className={`absolute left-0 mt-2 w-48 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50
-                ${theme === "dark" ? "bg-[#232323]" : "bg-white"}`}
-                    style={{ maxHeight: "60vh", overflowY: "auto" }}
-                  >
-                    <div className="py-1">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            onClick={() => handleNavigation("/home1")}
-                            className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200
-                          ${
-                            theme === "dark"
-                              ? active
-                                ? "bg-[#19e6f7] text-black"
-                                : "text-white"
-                              : active
-                              ? "bg-[#19e6f7] text-black"
-                              : "text-black"
-                          }`}
-                          >
-                            {t.home1}
-                          </button>
-                        )}
-                      </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            onClick={() => handleNavigation("/home2")}
-                            className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200
-                          ${
-                            theme === "dark"
-                              ? active
-                                ? "bg-[#19e6f7] text-black"
-                                : "text-white"
-                              : active
-                              ? "bg-[#19e6f7] text-black"
-                              : "text-black"
-                          }`}
-                          >
-                            {t.home2}
-                          </button>
-                        )}
-                      </Menu.Item>
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </div>
+                  {t.home2}
+
+                </div>
+
+                 
+              </div>
+            )}
           </div>
 
           {/* About Us */}
           <button
             onClick={() => handleNavigation("/about-us")}
             className={`text-lg font-semibold focus:outline-none transition-colors duration-300
-              ${
-                theme === "dark"
-                  ? location === "/about-us"
-                    ? "text-[#19e6f7]"
-                    : "text-white hover:text-[#19e6f7]"
-                  : location === "/about-us"
+              ${theme === "dark"
+                ? location === "/about-us"
+                  ? "text-[#19e6f7]"
+                  : "text-white hover:text-[#19e6f7]"
+                : location === "/about-us"
                   ? "text-[#19e6f7]"
                   : "text-black hover:text-[#19e6f7]"
               }`}
@@ -275,107 +281,76 @@ export default function Header({ theme, toggleTheme }) {
           </button>
 
           {/* Services Dropdown */}
-          <div className="relative inline-block text-left">
-            <div className="flex items-center gap-1">
-              <button
-                onClick={() => handleNavigation("/services")}
-                className={`font-semibold text-lg focus:outline-none transition-colors duration-300
-                  ${
-                    theme === "dark"
-                      ? location.startsWith("/services")
-                        ? "text-[#19e6f7]"
-                        : "text-white hover:text-[#19e6f7]"
-                      : location.startsWith("/services")
-                      ? "text-[#19e6f7]"
-                      : "text-black hover:text-[#19e6f7]"
-                  }`}
+          <div className="relative">
+            <span
+              className={`text-base cursor-pointer font-semibold flex items-center gap-1     rounded-lg focus:outline-none transition-all duration-200 `}
+              onClick={() => {
+                navigate("/services");
+
+              }}
+              onMouseEnter={handleServicesMouseEnter}
+              onMouseLeave={handleServicesMouseLeave}
+              onFocus={() => setServicesDropdown(true)}
+              onBlur={() => setServicesDropdown(false)}
+            >
+              {t.services}
+
+              <svg
+                className="w-5 h-5 ml-1"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
               >
-                {t.services}
-              </button>
-              <Menu as="div" className="relative inline-block text-left">
-                <Menu.Button
-                  className={`focus:outline-none transition-colors duration-300
-                  ${
-                    theme === "dark"
-                      ? "text-white hover:text-[#19e6f7]"
-                      : "text-black hover:text-[#19e6f7]"
-                  }`}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </span>
+            {serviceDropdown && (
+              <div
+                className={`absolute left-0 mt-2 w-60 border rounded-xl shadow-xl z-50 transition-colors duration-200 bg-white  `}
+                onMouseEnter={handleServicesMouseEnter}
+                onMouseLeave={handleServicesMouseLeave}
+              >
+                <div
+                  className={`block px-4 py-2 text-base rounded-lg transition-colors duration-200 cursor-pointer border-b text-black  `}
+                  onClick={() => {
+                    setServicesDropdown(false);
+                    navigate("/services");
+
+                  }}
                 >
-                  <FaChevronDown className="ml-1 text-xs" />
-                </Menu.Button>
-                <Transition
-                  as={Fragment}
-                  enter="transition ease-out duration-100"
-                  enterFrom="transform opacity-0 scale-95"
-                  enterTo="transform opacity-100 scale-100"
-                  leave="transition ease-in duration-75"
-                  leaveFrom="transform opacity-100 scale-100"
-                  leaveTo="transform opacity-0 scale-95"
-                >
-                  <Menu.Items
-                    className={`absolute left-0 mt-2 w-64 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50
-                ${theme === "dark" ? "bg-[#232323]" : "bg-white"}`}
-                    style={{ maxHeight: "60vh", overflowY: "auto" }}
+                  {t.viewAllServices}
+
+                </div>
+                {servicesDropdown.map((item) => (
+                  <div
+                    key={item.path}
+                    className={`block px-4 py-2 text-base rounded-lg transition-colors duration-200 cursor-pointer hover:bg-[#19e6f7] text-black   `}
+                    onClick={() => {
+                      setServicesDropdown(false);
+                      navigate(item.path);
+                    }}
                   >
-                    <div className="py-1">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            onClick={() => handleNavigation("/services")}
-                            className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200
-                          ${
-                            theme === "dark"
-                              ? active
-                                ? "bg-[#19e6f7] text-black"
-                                : "text-white"
-                              : active
-                              ? "bg-[#19e6f7] text-black"
-                              : "text-black"
-                          }`}
-                          >
-                            {t.viewAllServices}
-                          </button>
-                        )}
-                      </Menu.Item>
-                      <div className="border-t border-gray-300 my-1"></div>
-                      {servicesDropdown.map((service) => (
-                        <Menu.Item key={service.path}>
-                          {({ active }) => (
-                            <button
-                              onClick={() => handleNavigation(service.path)}
-                              className={`block w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200
-                            ${
-                              theme === "dark"
-                                ? active
-                                  ? "bg-[#19e6f7] text-black"
-                                  : "text-white"
-                                : active
-                                ? "bg-[#19e6f7] text-black"
-                                : "text-black"
-                            }`}
-                            >
-                              {service.name[language.code] || service.name.en}
-                            </button>
-                          )}
-                        </Menu.Item>
-                      ))}
-                    </div>
-                  </Menu.Items>
-                </Transition>
-              </Menu>
-            </div>
+                    {item.name[language.code] || item.name.en}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Blog */}
           <button
             onClick={() => handleNavigation("/blog")}
             className={`text-lg font-semibold focus:outline-none transition-colors duration-300
-              ${
-                theme === "dark"
-                  ? location === "/blog"
-                    ? "text-[#19e6f7]"
-                    : "text-white hover:text-[#19e6f7]"
-                  : location === "/blog"
+              ${theme === "dark"
+                ? location === "/blog"
+                  ? "text-[#19e6f7]"
+                  : "text-white hover:text-[#19e6f7]"
+                : location === "/blog"
                   ? "text-[#19e6f7]"
                   : "text-black hover:text-[#19e6f7]"
               }`}
@@ -388,15 +363,14 @@ export default function Header({ theme, toggleTheme }) {
             <button
               onClick={() => handleNavigation("/contact-us")}
               className={`text-lg font-semibold focus:outline-none transition-colors duration-300
-                  ${
-                    theme === "dark"
-                      ? location === "/contact-us"
-                        ? "text-[#19e6f7]"
-                        : "text-white hover:text-[#19e6f7]"
-                      : location === "/contact-us"
-                      ? "text-[#19e6f7]"
-                      : "text-black hover:text-[#19e6f7]"
-                  }`}
+                  ${theme === "dark"
+                  ? location === "/contact-us"
+                    ? "text-[#19e6f7]"
+                    : "text-white hover:text-[#19e6f7]"
+                  : location === "/contact-us"
+                    ? "text-[#19e6f7]"
+                    : "text-black hover:text-[#19e6f7]"
+                }`}
             >
               {t.contact}
             </button>
@@ -419,10 +393,9 @@ export default function Header({ theme, toggleTheme }) {
         <button
           onClick={toggleTheme}
           className={`p-2 rounded-full border border-[#19e6f7] transition-colors focus:outline-none focus:ring-2 focus:ring-[#19e6f7] mr-2
-            ${
-              theme === "dark"
-                ? "bg-[#232323] hover:bg-[#181a19] text-white"
-                : "bg-gray-200 hover:bg-gray-300 text-black"
+            ${theme === "dark"
+              ? "bg-[#232323] hover:bg-[#181a19] text-white"
+              : "bg-gray-200 hover:bg-gray-300 text-black"
             }`}
           aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
         >
@@ -459,11 +432,10 @@ export default function Header({ theme, toggleTheme }) {
                       {({ active }) => (
                         <button
                           onClick={handleAdminDashboard}
-                          className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                            active
+                          className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200 ${active
                               ? "bg-[#19e6f7] text-black"
                               : "text-[#19e6f7]"
-                          }`}
+                            }`}
                         >
                           Back to Admin Dashboard
                         </button>
@@ -474,11 +446,10 @@ export default function Header({ theme, toggleTheme }) {
                     {({ active }) => (
                       <button
                         onClick={handleLogout}
-                        className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200 ${
-                          active
+                        className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200 ${active
                             ? "bg-[#19e6f7] text-black"
                             : "text-[#19e6f7]"
-                        }`}
+                          }`}
                       >
                         {t.logout}
                       </button>
@@ -538,7 +509,7 @@ export default function Header({ theme, toggleTheme }) {
                   className="block text-base hover:text-[#19e6f7] focus:outline-none"
                 >{t.viewAllServices}</button>
               </li>
-              {servicesDropdown.map((item, i) => (
+              {servicesDropdown.map((item) => (
                 <li key={item.path}>
                   <button
                     onClick={() => { handleNavigation(item.path); setMenuOpen(false); }}

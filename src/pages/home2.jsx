@@ -911,13 +911,13 @@ const SecondHome = () => {
 
   
       <section className="py-20 px-4 min-h-[300px] flex items-center justify-center" style={{background: 'linear-gradient(35deg,rgb(43, 144, 112) 0%,rgb(46, 136, 199) 100%)', position: 'relative'}}>
-        <div className="max-w-6xl w-full flex flex-col md:flex-row items-center justify-center gap-36 py-16 relative">
+        <div className="max-w-6xl w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-36 py-8 md:py-16 relative">
           {/* CEO Image */}
-          <div className="flex-shrink-0 flex items-center justify-center">
-            <img src={ceoImg} loading="lazy" alt="CEO" className="w-[440px] h-[500px] object-cover rounded-2xl shadow-xl border-4 border-white" />
+          <div className="w-full md:w-auto flex-shrink-0 flex items-center justify-center mb-8 md:mb-0">
+            <img src={ceoImg} loading="lazy" alt="CEO" className="w-full max-w-xs md:max-w-md lg:max-w-lg h-auto object-cover rounded-2xl shadow-xl border-4 border-white" />
           </div>
           {/* Message Content */}
-          <div className="flex-1 flex flex-col justify-center items-start text-left text-white max-w-2xl">
+          <div className="w-full md:flex-1 flex flex-col justify-center items-start text-left text-white max-w-2xl">
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-lg">{{
               en: 'Meet Our',
               ar: 'تعرف على',
@@ -946,7 +946,7 @@ const SecondHome = () => {
         </div>
       </section>
       <section className="py-16 px-20" style={{ background: theme === 'dark' ? '#181818' : '#f5f5f5' }}>
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-5 ml-30">
+  <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start gap-5 md:ml-30">
           {/* Left: Heading, para, button */}
           <div className="flex-1 flex flex-col items-start justify-center mb-10 md:mb-0">
             <h2 className={`text-4xl md:text-5xl font-extrabold mb-3 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>{{
@@ -997,7 +997,7 @@ const SecondHome = () => {
             }[language.code]}</a>
           </div>
           {/* Right: 2x2 grid of cards */}
-          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-0 w-full">
+          <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
             <div className="bg-[#232323] shadow-2xl p-8 flex flex-col mb-0" style={{background: 'linear-gradient(0deg,rgb(57, 175, 186) 10%,rgb(21, 21, 21) 80%)'}}>
               <h3 className="text-lg font-bold text-white mb-2">{{
                 en: 'How AI is Changing the Future of Work',
