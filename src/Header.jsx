@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { Fragment } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import logo from "./assets/logo.jpg";
@@ -108,7 +109,25 @@ export default function Header({ theme, toggleTheme }) {
   const [serviceDropdown, setServicesDropdown] = useState(false);
   const [homeDropdown, setHomeDropdown] = useState(false);
   const [servicesTimeout, setServicesTimeout] = useState(null);
-  const [homeTimeout, setHomeTimeout] = useState(null);
+ 
+    // Avatar dropdown state
+    const [avatarDropdownOpen, setAvatarDropdownOpen] = useState(false);
+
+    // Close avatar dropdown on outside click
+    React.useEffect(() => {
+      if (!avatarDropdownOpen) return;
+      const handleClickOutside = (event) => {
+        const dropdown = document.getElementById('avatar-dropdown-menu');
+        const avatarBtn = document.getElementById('avatar-btn');
+        if (dropdown && !dropdown.contains(event.target) && avatarBtn && !avatarBtn.contains(event.target)) {
+          setAvatarDropdownOpen(false);
+        }
+      };
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }, [avatarDropdownOpen]);
 
 
 
@@ -142,20 +161,9 @@ export default function Header({ theme, toggleTheme }) {
     setServicesTimeout(timeout);
   };
 
-  // Home dropdown handlers
-  const handleHomeMouseEnter = () => {
-    if (homeTimeout) {
-      clearTimeout(homeTimeout);
-      setHomeTimeout(null);
-    }
-    setHomeDropdown(true);
-  };
-  const handleHomeMouseLeave = () => {
-    const timeout = setTimeout(() => {
-      setHomeDropdown(false);
-    }, 300); // 300ms delay before closing
-    setServicesTimeout(timeout);
-  };
+ 
+ 
+  
 
   // Logout handler
   const handleLogout = () => {
@@ -183,7 +191,7 @@ export default function Header({ theme, toggleTheme }) {
       <div className="flex items-center gap-6">
         <button
           onClick={() => handleNavigation("/home1")}
-          className="cursor-pointer hover:scale-105 transition-transform duration-300"
+          className="transition-transform duration-300 cursor-pointer hover:scale-105"
         >
           <img
             src={logo}
@@ -204,18 +212,11 @@ export default function Header({ theme, toggleTheme }) {
           {/* Home Dropdown */}
           <div className="relative">
             <span
-              className={`text-base cursor-pointer font-semibold flex items-center gap-1     rounded-lg focus:outline-none transition-all duration-200 `}
-              onClick={() => {
-                navigate("/home");
-
-              }}
-              onMouseEnter={handleHomeMouseEnter}
-              onMouseLeave={handleHomeMouseLeave}
+              className={`text-base cursor-pointer font-semibold flex items-center gap-1    rounded-lg focus:outline-none transition-all duration-200  `}
+              onClick={() => setHomeDropdown((open) => !open)}
               onFocus={() => setHomeDropdown(true)}
-              onBlur={() => setHomeDropdown(false)}
             >
               {t.home}
-
               <svg
                 className="w-5 h-5 ml-1"
                 fill="none"
@@ -232,34 +233,28 @@ export default function Header({ theme, toggleTheme }) {
             </span>
             {homeDropdown && (
               <div
-                className={`absolute left-0 mt-2 w-60 border rounded-xl shadow-xl z-50 transition-colors duration-200 bg-white text-black  `}
-                onMouseEnter={handleHomeMouseEnter}
-                onMouseLeave={handleHomeMouseLeave}
+                className={`absolute bg-white left-0 mt-2 w-48 border rounded shadow-lg z-50 transition-colors duration-200  `}
               >
-                <div
-                  className={`block px-4 py-2 text-base rounded-lg transition-colors duration-200 cursor-pointer border-b  `}
+                <Link
+                  to="/home1"
+                  className={`block px-4 py-3 text-base transition-colors duration-200 `}
                   onClick={() => {
                     setHomeDropdown(false);
-                    navigate("/home1");
-
+                     
                   }}
                 >
                   {t.home1}
-
-                </div>
-                <div
-                  className={`block px-4 py-2 text-base rounded-lg transition-colors duration-200 cursor-pointer border-b   `}
+                </Link>
+                <Link
+                  to="/home2"
+                  className={`block px-4 py-3 text-base transition-colors duration-200 `}
                   onClick={() => {
                     setHomeDropdown(false);
-                    navigate("/home2");
-
+                    
                   }}
                 >
                   {t.home2}
-
-                </div>
-
-                 
+                </Link>
               </div>
             )}
           </div>
@@ -377,7 +372,7 @@ export default function Header({ theme, toggleTheme }) {
             <select
               value={language.code}
               onChange={(e) => setLanguage(languages[e.target.value])}
-              className="px-2 py-1 rounded border focus:outline-none bg-white text-black text-sm ml-2"
+              className="px-2 py-1 ml-2 text-sm text-black bg-white border rounded focus:outline-none"
               style={{ direction: "ltr" }}
             >
               {Object.values(languages).map((lang) => (
@@ -408,57 +403,43 @@ export default function Header({ theme, toggleTheme }) {
 
         {/* Avatar Dropdown */}
         {email && (
-          <Menu as="div" className="relative">
-            <Menu.Button
+          <div className="relative">
+            <button
+              id="avatar-btn"
               className="flex items-center justify-center rounded-full bg-[#19e6f7] text-[#181a19] font-bold text-lg w-10 h-10 focus:outline-none"
               style={{ minWidth: 40, minHeight: 40 }}
               title={email}
+              onClick={() => setAvatarDropdownOpen((open) => !open)}
+              aria-haspopup="true"
+              aria-expanded={avatarDropdownOpen}
             >
               {initials}
-            </Menu.Button>
-            <Transition
-              as={Fragment}
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <Menu.Items className="absolute right-0 mt-2 w-32 origin-top-right rounded-md bg-[#232323] text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50">
+            </button>
+            {avatarDropdownOpen && (
+              <div
+                id="avatar-dropdown-menu"
+                className="absolute right-0 mt-2 w-40 origin-top-right rounded-md bg-[#232323] text-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50 animate-fade-in"
+                style={{ transition: 'opacity 0.2s, transform 0.2s', opacity: avatarDropdownOpen ? 1 : 0, transform: avatarDropdownOpen ? 'translateY(0)' : 'translateY(-10px)' }}
+              >
                 <div className="py-1">
                   {(isAdmin === true || localStorage.getItem("userRole") === "admin") && (
-                    <Menu.Item>
-                      {({ active }) => (
-                        <button
-                          onClick={handleAdminDashboard}
-                          className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200 ${active
-                              ? "bg-[#19e6f7] text-black"
-                              : "text-[#19e6f7]"
-                            }`}
-                        >
-                          Back to Admin Dashboard
-                        </button>
-                      )}
-                    </Menu.Item>
+                    <button
+                      onClick={() => { setAvatarDropdownOpen(false); handleAdminDashboard(); }}
+                      className="w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-[#19e6f7] hover:text-black text-[#19e6f7]"
+                    >
+                      Back to Admin Dashboard
+                    </button>
                   )}
-                  <Menu.Item>
-                    {({ active }) => (
-                      <button
-                        onClick={handleLogout}
-                        className={`w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200 ${active
-                            ? "bg-[#19e6f7] text-black"
-                            : "text-[#19e6f7]"
-                          }`}
-                      >
-                        {t.logout}
-                      </button>
-                    )}
-                  </Menu.Item>
+                  <button
+                    onClick={() => { setAvatarDropdownOpen(false); handleLogout(); }}
+                    className="w-full text-left px-4 py-2 text-sm font-medium transition-colors duration-200 hover:bg-[#19e6f7] hover:text-black text-[#19e6f7]"
+                  >
+                    {t.logout}
+                  </button>
                 </div>
-              </Menu.Items>
-            </Transition>
-          </Menu>
+              </div>
+            )}
+          </div>
         )}
       </div>
 
@@ -532,7 +513,7 @@ export default function Header({ theme, toggleTheme }) {
             <select
               value={language.code}
               onChange={e => setLanguage(languages[e.target.value])}
-              className="px-2 py-1 rounded border focus:outline-none bg-white text-black text-sm"
+              className="px-2 py-1 text-sm text-black bg-white border rounded focus:outline-none"
               style={{ direction: 'ltr' }}
             >
               {Object.values(languages).map(lang => (
